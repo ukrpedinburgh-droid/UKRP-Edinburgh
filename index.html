@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK:RP Edinburgh | Roblox Roleplay Experience (Late 2028)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#0055A5', // Scottish Saltire Blue
+                            cyan: '#00d2ff',
+                            purple: '#7928CA',
+                            dark: '#080C14',
+                            card: '#0F172A',
+                            accent: '#38BDF8'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        cinzel: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #060911;
+            color: #f3f4f6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-panel-hover {
+            transition: all 0.3s ease;
+        }
+
+        .glass-panel-hover:hover {
+            background: rgba(30, 41, 59, 0.75);
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px -10px rgba(0, 102, 204, 0.3);
+        }
+
+        /* Tartan Cyber Overlay Grid */
+        .tartan-grid {
+            background-image: 
+                linear-gradient(to right, rgba(0, 85, 165, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 85, 165, 0.05) 1px, transparent 1px),
+                linear-gradient(to right, rgba(121, 40, 202, 0.03) 2px, transparent 2px),
+                linear-gradient(to bottom, rgba(121, 40, 202, 0.03) 2px, transparent 2px);
+            background-size: 40px 40px, 40px 40px, 160px 160px, 160px 160px;
+        }
+
+        /* Custom Glowing Text */
+        .glow-text-blue {
+            text-shadow: 0 0 20px rgba(0, 210, 255, 0.6), 0 0 40px rgba(0, 85, 165, 0.4);
+        }
+
+        .glow-text-purple {
+            text-shadow: 0 0 20px rgba(121, 40, 202, 0.6);
+        }
+
+        /* Canvas Particle Background */
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060911;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0055A5;
+        }
+
+        .animated-gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #38bdf8 50%, #9333ea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="tartan-grid min-h-screen selection:bg-brand-blue selection:text-white relative">
+
+    <!-- Particle Layer -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass-panel border-b border-white/10 px-4 lg:px-8 py-4 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-blue to-brand-purple flex items-center justify-center text-white font-black text-xl shadow-lg shadow-brand-blue/30 group-hover:scale-105 transition-transform">
+                    UK
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold tracking-wider text-lg leading-none text-white group-hover:text-brand-cyan transition-colors">UK:RP EDINBURGH</span>
+                    <span class="text-[10px] text-gray-400 font-mono tracking-widest uppercase">ROBLOX EXPERIENCE</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-gray-300">
+                <a href="#about" class="hover:text-brand-cyan transition-colors">About</a>
+                <a href="#garage" class="hover:text-brand-cyan transition-colors">Garage</a>
+                <a href="#map-explorer" class="hover:text-brand-cyan transition-colors">City Map</a>
+                <a href="#customizer" class="hover:text-brand-cyan transition-colors">Outfits</a>
+                <a href="#devlog" class="hover:text-brand-cyan transition-colors">Devlog</a>
+                <a href="#quiz" class="hover:text-brand-cyan transition-colors">RP Quiz</a>
+                <a href="#faq" class="hover:text-brand-cyan transition-colors">FAQ</a>
+            </div>
+
+            <!-- Action CTA -->
+            <div class="hidden sm:flex items-center gap-3">
+                <a href="https://github.com" target="_blank" class="p-2.5 rounded-lg glass-panel hover:bg-white/10 text-gray-300 hover:text-white transition-all" title="GitHub Repository">
+                    <i class="fa-brands fa-github text-lg"></i>
+                </a>
+                <a href="#community" class="px-5 py-2.5 rounded-lg bg-gradient-to-r from-brand-blue to-sky-500 hover:from-sky-500 hover:to-brand-blue text-white font-semibold text-sm shadow-lg shadow-brand-blue/25 hover:shadow-brand-cyan/40 transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-discord"></i> Join Community
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-toggle" class="md:hidden text-gray-300 hover:text-white text-2xl focus:outline-none" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Drops Down -->
+        <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 px-2 flex flex-col gap-3 text-gray-300 border-t border-white/10 mt-3">
+            <a href="#about" class="px-3 py-2 rounded-md hover:bg-white/5 hover:text-white">About</a>
+            <a href="#garage" class="px-3 py-2 rounded-md hover:bg-white/5 hover:text-white">Garage Inspector</a>
+            <a href="#map-explorer" class="px-3 py-2 rounded-md hover:bg-white/5 hover:text-white">City Map</a>
+            <a href="#customizer" class="px-3 py-2 rounded-md hover:bg-white/5 hover:text-white">Outfit Builder</a>
+            <a href="#devlog" class="px-3 py-2 rounded-md hover:bg-white/5 hover:text-white">Devlogs</a>
+            <a href="#quiz" class="px-3 py-2 rounded-md hover:bg-white/5 hover:text-white">RP Quiz</a>
+            <a href="#faq" class="px-3 py-2 rounded-md hover:bg-white/5 hover:text-white">FAQ</a>
+            <div class="pt-2 flex items-center gap-2">
+                <a href="#community" class="w-full text-center py-2.5 rounded-lg bg-brand-blue text-white font-semibold">Join Discord</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center pt-24 pb-16 px-4 overflow-hidden" id="hero">
+        <!-- Dramatic Backdrop Glow & Edinburgh Skyline Silhouette Visual -->
+        <div class="absolute inset-0 z-0 opacity-40">
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-blue/30 rounded-full blur-[140px] pointer-events-none"></div>
+            <div class="absolute bottom-10 left-1/3 w-[400px] h-[400px] bg-purple-600/20 rounded-full blur-[120px] pointer-events-none"></div>
+            <!-- City Silhouette SVG Overlay -->
+            <svg class="absolute bottom-0 left-0 right-0 w-full text-brand-dark/80 h-48 md:h-64 object-cover opacity-60" viewBox="0 0 1200 320" fill="currentColor">
+                <path d="M0,320 L0,220 L40,220 L40,180 L70,180 L70,220 L120,220 L140,120 L160,120 L170,220 L220,220 L220,150 L250,130 L280,150 L280,220 L350,220 L380,80 L400,80 L410,60 L420,80 L440,80 L470,220 L540,220 L540,160 L590,160 L590,220 L660,220 L680,110 L720,110 L740,220 L810,220 L830,140 L880,140 L900,220 L980,220 L1000,90 L1040,90 L1060,220 L1200,220 L1200,320 Z"></path>
+            </svg>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto text-center flex flex-col items-center gap-6">
+            <!-- Scottish Saltire Badge -->
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-brand-cyan/30 text-brand-cyan text-xs font-mono uppercase tracking-widest animate-pulse">
+                <span class="w-2 h-2 rounded-full bg-brand-cyan"></span>
+                Official Roblox Teaser Portal
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-5xl sm:text-7xl md:text-8xl font-extrabold tracking-tight font-cinzel text-white leading-none">
+                UK:RP <span class="animated-gradient-text">EDINBURGH</span>
+            </h1>
+
+            <!-- Slogan -->
+            <p class="max-w-2xl text-lg sm:text-xl text-gray-300 font-light leading-relaxed">
+                Experience the ultimate next-generation Scottish roleplay environment. High-stakes emergency response, detailed city architecture, and living civilian ecosystem.
+            </p>
+
+            <!-- Release Target Banner -->
+            <div class="my-2 px-6 py-2 rounded-2xl glass-panel border border-white/10 flex items-center gap-3">
+                <i class="fa-solid fa-calendar-star text-brand-cyan text-xl"></i>
+                <span class="text-sm font-semibold uppercase tracking-wider text-gray-300">Target Launch Window: <strong class="text-white font-mono text-base ml-1">LATE 2028</strong></span>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-4 mt-2 w-full max-w-lg">
+                <button onclick="handleAction('Roblox Group')" class="flex-1 min-w-[160px] px-6 py-4 rounded-xl bg-gradient-to-r from-brand-blue to-sky-600 hover:from-sky-500 hover:to-brand-blue text-white font-bold text-sm tracking-wide shadow-xl shadow-brand-blue/30 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-square-poll-vertical"></i> Join Roblox Group
+                </button>
+                <button onclick="handleAction('Discord')" class="flex-1 min-w-[160px] px-6 py-4 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold text-sm tracking-wide shadow-xl shadow-indigo-600/30 hover:scale-[1.02] transition-all flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-discord"></i> Discord Server
+                </button>
+                <button onclick="handleAction('Wishlist')" class="w-full sm:w-auto px-6 py-4 rounded-xl glass-panel hover:bg-white/10 text-white font-semibold text-sm border border-white/15 hover:border-brand-cyan/50 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-regular fa-star text-yellow-400"></i> Wishlist / Favorite
+                </button>
+            </div>
+
+            <!-- Countdown Timer Container -->
+            <div class="w-full max-w-3xl mt-10 p-6 sm:p-8 rounded-3xl glass-panel border border-white/10 shadow-2xl relative">
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-brand-blue text-[11px] font-mono tracking-widest text-white uppercase font-bold">
+                    Countdown to Beta Launch
+                </div>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-2" id="countdown">
+                    <div class="flex flex-col items-center p-3 sm:p-4 rounded-2xl bg-slate-900/80 border border-white/5">
+                        <span id="cd-days" class="text-3xl sm:text-5xl font-extrabold font-mono text-brand-cyan glow-text-blue">000</span>
+                        <span class="text-xs uppercase tracking-widest text-gray-400 font-semibold mt-1">Days</span>
+                    </div>
+                    <div class="flex flex-col items-center p-3 sm:p-4 rounded-2xl bg-slate-900/80 border border-white/5">
+                        <span id="cd-hours" class="text-3xl sm:text-5xl font-extrabold font-mono text-white">00</span>
+                        <span class="text-xs uppercase tracking-widest text-gray-400 font-semibold mt-1">Hours</span>
+                    </div>
+                    <div class="flex flex-col items-center p-3 sm:p-4 rounded-2xl bg-slate-900/80 border border-white/5">
+                        <span id="cd-minutes" class="text-3xl sm:text-5xl font-extrabold font-mono text-white">00</span>
+                        <span class="text-xs uppercase tracking-widest text-gray-400 font-semibold mt-1">Minutes</span>
+                    </div>
+                    <div class="flex flex-col items-center p-3 sm:p-4 rounded-2xl bg-slate-900/80 border border-white/5">
+                        <span id="cd-seconds" class="text-3xl sm:text-5xl font-extrabold font-mono text-purple-400 glow-text-purple">00</span>
+                        <span class="text-xs uppercase tracking-widest text-gray-400 font-semibold mt-1">Seconds</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Key Game Features Section -->
+    <section class="py-20 px-4 max-w-7xl mx-auto" id="features">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-mono font-bold tracking-widest text-brand-cyan uppercase mb-2">Unmatched Depth</h2>
+            <p class="text-3xl sm:text-5xl font-extrabold text-white">Engineered For Immersion</p>
+            <p class="text-gray-400 mt-4">Built from the ground up on modern Roblox technology for performance, realism, and rich emergent roleplay gameplay.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Feature 1 -->
+            <div class="p-8 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 rounded-xl bg-brand-blue/20 border border-brand-blue/40 flex items-center justify-center text-brand-cyan text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-city"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">1:1 Replica Architecture</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Explore stunningly recreated Edinburgh streets. High accuracy models of historic landmarks, cobble streets, modern tramlines, and alleyways.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/5 text-xs text-brand-cyan font-mono flex items-center justify-between">
+                    <span>LOCATION REALISM</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Feature 2 -->
+            <div class="p-8 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 rounded-xl bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Police Scotland Mechanics</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Authentic Scottish policing tools, CAD radio dispatch, traffic units, tactical response gear, and dynamic booking procedures.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/5 text-xs text-purple-400 font-mono flex items-center justify-between">
+                    <span>EMERGENCY SERVICES</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Feature 3 -->
+            <div class="p-8 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-car-side"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Custom Fleet & Tuning</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Drive UK-spec vehicles featuring custom emergency lighting (Matrix ELS), realistic chassis physics, livery customization, and engine mods.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/5 text-xs text-emerald-400 font-mono flex items-center justify-between">
+                    <span>VEHICLE SYSTEMS</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Feature 4 -->
+            <div class="p-8 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-sack-dollar"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Living Economy</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Earn wages through civilian jobs such as Lothian Bus driver, delivery courier, shopkeeper, or manage private real estate properties.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/5 text-xs text-amber-400 font-mono flex items-center justify-between">
+                    <span>CIVILIAN ECONOMY</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Feature 5 -->
+            <div class="p-8 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 rounded-xl bg-rose-500/20 border border-rose-500/40 flex items-center justify-center text-rose-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-fire-extinguisher"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Scottish Fire & Ambulance</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Simulated structural fires, hazardous rescues, medical triage, and stretcher mechanics with Scottish Ambulance Service equipment.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/5 text-xs text-rose-400 font-mono flex items-center justify-between">
+                    <span>FIRST RESPONDERS</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+
+            <!-- Feature 6 -->
+            <div class="p-8 rounded-2xl glass-panel glass-panel-hover flex flex-col justify-between group">
+                <div>
+                    <div class="w-14 h-14 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 text-2xl mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-masks-theater"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Immersive Roleplay Tools</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Subtle animations, custom character customization, Scottish voice-lines, dynamic weather engine (Edinburgh mist/rain), and interactive inventory.
+                    </p>
+                </div>
+                <div class="mt-6 pt-4 border-t border-white/5 text-xs text-cyan-400 font-mono flex items-center justify-between">
+                    <span>ROLEPLAY FRAMEWORK</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 1: VEHICLE GARAGE INSPECTOR -->
+    <section class="py-20 px-4 max-w-7xl mx-auto" id="garage">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-xs font-mono font-bold tracking-widest text-brand-cyan uppercase mb-2">Scottish Emergency Fleet</h2>
+            <p class="text-3xl sm:text-5xl font-extrabold text-white">Vehicle Garage Inspector</p>
+            <p class="text-gray-400 mt-3">Inspect UK-spec vehicles, test siren audio tones, and toggle operational liveries.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glass-panel p-6 sm:p-10 rounded-3xl border border-white/10">
+            <!-- Left Controls / Vehicle Selection -->
+            <div class="lg:col-span-4 flex flex-col gap-3">
+                <h4 class="text-xs font-mono uppercase text-gray-400 mb-1">Select Fleet Vehicle</h4>
+                <button onclick="selectVehicle('volvo')" id="vbtn-volvo" class="vehicle-btn text-left p-4 rounded-xl glass-panel border-l-4 border-brand-cyan bg-white/10 flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-white">Police Scotland Volvo V90</div>
+                        <div class="text-xs text-gray-400">Armed Response & Traffic Unit</div>
+                    </div>
+                    <i class="fa-solid fa-car-on text-brand-cyan"></i>
+                </button>
+                <button onclick="selectVehicle('bmwx5')" id="vbtn-bmwx5" class="vehicle-btn text-left p-4 rounded-xl glass-panel border-l-4 border-transparent hover:bg-white/5 flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-white">Police Scotland BMW X5</div>
+                        <div class="text-xs text-gray-400">Highways & Tactical Patrol</div>
+                    </div>
+                    <i class="fa-solid fa-car text-gray-400"></i>
+                </button>
+                <button onclick="selectVehicle('sprinter')" id="vbtn-sprinter" class="vehicle-btn text-left p-4 rounded-xl glass-panel border-l-4 border-transparent hover:bg-white/5 flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-white">SAS Mercedes Sprinter</div>
+                        <div class="text-xs text-gray-400">Scottish Ambulance Service</div>
+                    </div>
+                    <i class="fa-solid fa-truck-medical text-emerald-400"></i>
+                </button>
+                <button onclick="selectVehicle('scania')" id="vbtn-scania" class="vehicle-btn text-left p-4 rounded-xl glass-panel border-l-4 border-transparent hover:bg-white/5 flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-white">SFRS Scania Appliance</div>
+                        <div class="text-xs text-gray-400">Scottish Fire Heavy Rescue</div>
+                    </div>
+                    <i class="fa-solid fa-truck-front text-rose-400"></i>
+                </button>
+                <button onclick="selectVehicle('lothian')" id="vbtn-lothian" class="vehicle-btn text-left p-4 rounded-xl glass-panel border-l-4 border-transparent hover:bg-white/5 flex items-center justify-between">
+                    <div>
+                        <div class="font-bold text-white">Lothian Double Decker</div>
+                        <div class="text-xs text-gray-400">Princes St Transport Bus</div>
+                    </div>
+                    <i class="fa-solid fa-bus text-amber-400"></i>
+                </button>
+            </div>
+
+            <!-- Right Vehicle Inspector Card -->
+            <div class="lg:col-span-8 flex flex-col gap-6">
+                <div class="relative h-64 sm:h-80 rounded-2xl overflow-hidden glass-panel border border-white/10 flex items-center justify-center p-6 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900">
+                    <div id="siren-flash" class="absolute inset-0 bg-blue-500/0 transition-colors pointer-events-none"></div>
+                    <img id="vehicle-img" src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800&auto=format&fit=crop" alt="Vehicle Preview" class="max-h-full object-contain filter drop-shadow-[0_20px_20px_rgba(0,0,0,0.8)] transition-all duration-300">
+                    <span id="vehicle-badge" class="absolute top-4 left-4 px-3 py-1 rounded-full bg-brand-blue/80 text-white text-xs font-mono uppercase tracking-widest">Traffic Enforcement</span>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 id="vehicle-title" class="text-2xl font-bold text-white">Police Scotland Volvo V90</h3>
+                        <p id="vehicle-specs" class="text-sm text-gray-400">Top Speed: 155 MPH | AWD Tactical | Matrix Blue ELS Lightbar</p>
+                    </div>
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        <button onclick="toggleSirenAudio()" id="siren-btn" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl bg-brand-blue hover:bg-sky-500 text-white text-sm font-bold flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-volume-high"></i> <span id="siren-btn-text">Test Siren Audio</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Customization Options -->
+                <div class="p-4 rounded-xl bg-slate-900/90 border border-white/5 flex flex-wrap items-center justify-between gap-4 text-xs text-gray-300">
+                    <div class="flex items-center gap-2">
+                        <span class="font-bold text-white">Livery Variant:</span>
+                        <select id="livery-select" onchange="updateVehicleLivery()" class="bg-slate-800 text-white border border-white/10 rounded-lg px-3 py-1.5 focus:outline-none">
+                            <option value="battenburg">Battenburg High Vis (Police Scotland)</option>
+                            <option value="unmarked">Unmarked Tactical Obsidian</option>
+                            <option value="stealth">Traffic Interceptor Dark</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-bolt text-amber-400"></i> ELS Matrix 3.0</span>
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-gauge-high text-brand-cyan"></i> Custom Physics</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 2: INTERACTIVE CITY MAP EXPLORER -->
+    <section class="py-20 px-4 bg-slate-950/60 border-y border-white/5" id="map-explorer">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="text-xs font-mono font-bold tracking-widest text-brand-cyan uppercase mb-2">District Intelligence</h2>
+                <p class="text-3xl sm:text-5xl font-extrabold text-white">Edinburgh Map Explorer</p>
+                <p class="text-gray-400 mt-3">Click interactive map sectors to preview district crime index, patrol zones, and faction spawns.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Interactive Vector Map Canvas Wrapper -->
+                <div class="lg:col-span-8 relative rounded-3xl glass-panel border border-white/10 p-6 min-h-[400px] flex items-center justify-center overflow-hidden">
+                    <!-- Stylized Edinburgh Vector Map Grid -->
+                    <div class="absolute inset-0 bg-slate-950 opacity-90 tartan-grid"></div>
+                    
+                    <!-- Map Hotspots -->
+                    <div class="relative w-full h-[360px] sm:h-[420px] bg-slate-900/50 rounded-2xl border border-white/5 flex items-center justify-center">
+                        <svg class="absolute inset-0 w-full h-full text-brand-blue/20" viewBox="0 0 800 500" fill="none" stroke="currentColor" stroke-width="2">
+                            <!-- Simulated Street Map Lines -->
+                            <path d="M50 250 Q 200 200 400 250 T 750 220" stroke="#0055A5" stroke-width="4" stroke-dasharray="6,6"/>
+                            <path d="M200 50 L 200 450 M 400 50 L 400 450 M 600 50 L 600 450" stroke="#1e293b"/>
+                            <circle cx="200" cy="180" r="40" fill="rgba(0, 85, 165, 0.1)"/>
+                            <circle cx="450" cy="220" r="60" fill="rgba(121, 40, 202, 0.1)"/>
+                        </svg>
+
+                        <!-- Hotspot Pins -->
+                        <button onclick="selectDistrict('castle')" class="absolute top-[35%] left-[22%] group -translate-x-1/2 -translate-y-1/2 focus:outline-none">
+                            <span class="absolute -inset-2 bg-brand-cyan/30 rounded-full animate-ping"></span>
+                            <div class="w-8 h-8 rounded-full bg-brand-cyan text-slate-950 font-bold flex items-center justify-center text-xs shadow-lg group-hover:scale-125 transition-transform">
+                                <i class="fa-solid fa-chess-rook"></i>
+                            </div>
+                            <span class="absolute top-9 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-slate-900 text-[10px] text-white whitespace-nowrap border border-white/10">Edinburgh Castle</span>
+                        </button>
+
+                        <button onclick="selectDistrict('royalmile')" class="absolute top-[42%] left-[45%] group -translate-x-1/2 -translate-y-1/2 focus:outline-none">
+                            <span class="absolute -inset-2 bg-brand-blue/30 rounded-full animate-ping"></span>
+                            <div class="w-8 h-8 rounded-full bg-brand-blue text-white font-bold flex items-center justify-center text-xs shadow-lg group-hover:scale-125 transition-transform">
+                                <i class="fa-solid fa-road"></i>
+                            </div>
+                            <span class="absolute top-9 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-slate-900 text-[10px] text-white whitespace-nowrap border border-white/10">Royal Mile</span>
+                        </button>
+
+                        <button onclick="selectDistrict('waverley')" class="absolute top-[28%] left-[60%] group -translate-x-1/2 -translate-y-1/2 focus:outline-none">
+                            <div class="w-8 h-8 rounded-full bg-amber-400 text-slate-950 font-bold flex items-center justify-center text-xs shadow-lg group-hover:scale-125 transition-transform">
+                                <i class="fa-solid fa-train"></i>
+                            </div>
+                            <span class="absolute top-9 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-slate-900 text-[10px] text-white whitespace-nowrap border border-white/10">Waverley Station</span>
+                        </button>
+
+                        <button onclick="selectDistrict('hq')" class="absolute top-[65%] left-[75%] group -translate-x-1/2 -translate-y-1/2 focus:outline-none">
+                            <div class="w-8 h-8 rounded-full bg-purple-500 text-white font-bold flex items-center justify-center text-xs shadow-lg group-hover:scale-125 transition-transform">
+                                <i class="fa-solid fa-building-shield"></i>
+                            </div>
+                            <span class="absolute top-9 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-slate-900 text-[10px] text-white whitespace-nowrap border border-white/10">Police HQ</span>
+                        </button>
+
+                        <button onclick="selectDistrict('leith')" class="absolute top-[18%] left-[82%] group -translate-x-1/2 -translate-y-1/2 focus:outline-none">
+                            <div class="w-8 h-8 rounded-full bg-rose-500 text-white font-bold flex items-center justify-center text-xs shadow-lg group-hover:scale-125 transition-transform">
+                                <i class="fa-solid fa-ship"></i>
+                            </div>
+                            <span class="absolute top-9 left-1/2 -translate-x-1/2 px-2 py-0.5 rounded bg-slate-900 text-[10px] text-white whitespace-nowrap border border-white/10">Leith Docks</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- District Info Panel -->
+                <div class="lg:col-span-4 glass-panel p-6 sm:p-8 rounded-3xl border border-white/10 flex flex-col justify-between h-full">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span id="district-badge" class="px-3 py-1 rounded-full bg-brand-blue/20 text-brand-cyan text-xs font-mono uppercase">Historic Landmark</span>
+                            <span id="district-crime" class="text-xs font-mono text-emerald-400 font-bold">Crime Index: LOW</span>
+                        </div>
+                        <h3 id="district-title" class="text-2xl font-bold text-white mb-2">Edinburgh Castle Sector</h3>
+                        <p id="district-desc" class="text-gray-300 text-sm leading-relaxed mb-6">
+                            High elevation historic fortress zone. Heavy foot traffic and tourist presence. High priority security coverage provided by Police Scotland.
+                        </p>
+
+                        <div class="space-y-3 pt-4 border-t border-white/10 text-xs">
+                            <div class="flex justify-between text-gray-400">
+                                <span>Primary Faction Spawn:</span>
+                                <strong id="district-spawn" class="text-white">Armed Response Unit</strong>
+                            </div>
+                            <div class="flex justify-between text-gray-400">
+                                <span>Subway / Tram Connect:</span>
+                                <strong id="district-transit" class="text-white">Princes St Tram Stop</strong>
+                            </div>
+                            <div class="flex justify-between text-gray-400">
+                                <span>High-Risk Patrol Zone:</span>
+                                <strong id="district-patrol" class="text-white">Sector Alpha 1</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button onclick="handleAction('District Teleport Pre-book')" class="mt-6 w-full py-3 rounded-xl bg-gradient-to-r from-brand-blue to-sky-500 hover:from-sky-500 hover:to-brand-blue text-white font-bold text-sm transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-location-crosshairs"></i> Set Preferred Patrol Spawn
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 3: UNIFORM & CHARACTER CUSTOMIZER TEASER -->
+    <section class="py-20 px-4 max-w-7xl mx-auto" id="customizer">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-xs font-mono font-bold tracking-widest text-brand-cyan uppercase mb-2">Tactical Locker Preview</h2>
+            <p class="text-3xl sm:text-5xl font-extrabold text-white">Uniform & Outfit Customizer</p>
+            <p class="text-gray-400 mt-3">Preview equipment loadouts, high-vis vests, radios, and official UK badges.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center glass-panel p-6 sm:p-10 rounded-3xl border border-white/10">
+            <!-- Customizer Controls -->
+            <div class="lg:col-span-6 space-y-6">
+                <!-- Faction Base Selector -->
+                <div>
+                    <label class="block text-xs font-mono uppercase text-gray-400 mb-2">Role Branch</label>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                        <button onclick="setOutfitRole('police')" id="role-police" class="outfit-role-btn py-2 px-3 rounded-xl glass-panel bg-brand-blue text-white font-bold text-xs">Police</button>
+                        <button onclick="setOutfitRole('paramedic')" id="role-paramedic" class="outfit-role-btn py-2 px-3 rounded-xl glass-panel text-gray-400 hover:text-white font-bold text-xs">Medical</button>
+                        <button onclick="setOutfitRole('fire')" id="role-fire" class="outfit-role-btn py-2 px-3 rounded-xl glass-panel text-gray-400 hover:text-white font-bold text-xs">Firefighter</button>
+                        <button onclick="setOutfitRole('civilian')" id="role-civilian" class="outfit-role-btn py-2 px-3 rounded-xl glass-panel text-gray-400 hover:text-white font-bold text-xs">Civilian</button>
+                    </div>
+                </div>
+
+                <!-- Customizer Gear Toggles -->
+                <div class="space-y-4 pt-4 border-t border-white/10">
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-white/5">
+                        <span class="text-sm text-gray-300 flex items-center gap-2"><i class="fa-solid fa-hat-cowboy text-brand-cyan"></i> Headgear / Custodian Hat</span>
+                        <input type="checkbox" id="gear-hat" onchange="updateOutfitPreview()" checked class="w-4 h-4 accent-brand-cyan cursor-pointer">
+                    </div>
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-white/5">
+                        <span class="text-sm text-gray-300 flex items-center gap-2"><i class="fa-solid fa-vest-patches text-brand-cyan"></i> High-Vis Tactical Vest</span>
+                        <input type="checkbox" id="gear-vest" onchange="updateOutfitPreview()" checked class="w-4 h-4 accent-brand-cyan cursor-pointer">
+                    </div>
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-white/5">
+                        <span class="text-sm text-gray-300 flex items-center gap-2"><i class="fa-solid fa-walkie-talkie text-brand-cyan"></i> Sepura Airwave Radio & Mic</span>
+                        <input type="checkbox" id="gear-radio" onchange="updateOutfitPreview()" checked class="w-4 h-4 accent-brand-cyan cursor-pointer">
+                    </div>
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-900/80 border border-white/5">
+                        <span class="text-sm text-gray-300 flex items-center gap-2"><i class="fa-solid fa-id-badge text-brand-cyan"></i> Official Scotland Police Insignia</span>
+                        <input type="checkbox" id="gear-badge" onchange="updateOutfitPreview()" checked class="w-4 h-4 accent-brand-cyan cursor-pointer">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customizer Character Preview Window -->
+            <div class="lg:col-span-6 flex flex-col items-center justify-center">
+                <div class="relative w-64 h-80 rounded-3xl bg-slate-900 border border-brand-cyan/40 p-6 flex flex-col items-center justify-between overflow-hidden shadow-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-brand-blue/10 pointer-events-none"></div>
+                    
+                    <!-- Headgear Layer -->
+                    <div id="layer-hat" class="z-10 text-4xl text-brand-cyan mt-4 transition-all">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+
+                    <!-- Torso / Vest Layer -->
+                    <div class="z-10 text-center my-auto">
+                        <div id="layer-vest" class="text-6xl text-white font-bold transition-all">
+                            <i class="fa-solid fa-shirt"></i>
+                        </div>
+                        <div id="layer-badge" class="mt-2 text-xs font-mono bg-brand-blue/80 px-2 py-1 rounded text-white inline-block">
+                            Police Constable #402
+                        </div>
+                    </div>
+
+                    <!-- Radio / Accessories Layer -->
+                    <div class="z-10 w-full flex justify-between items-center text-xs text-gray-400 font-mono pt-2 border-t border-white/10">
+                        <span id="layer-radio"><i class="fa-solid fa-walkie-talkie text-emerald-400"></i> AIRWAVE ON</span>
+                        <span id="layer-status" class="text-brand-cyan font-bold">READY</span>
+                    </div>
+                </div>
+
+                <p id="outfit-summary" class="text-xs text-gray-400 mt-4 text-center">Loadout: Police Scotland Operational Patrol Uniform (Hi-Vis Yellow)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 4: DEVLOG & PATCH NOTES TIMELINE -->
+    <section class="py-20 px-4 bg-slate-950/60 border-y border-white/5" id="devlog">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <h2 class="text-xs font-mono font-bold tracking-widest text-brand-cyan uppercase mb-2">Development Feed</h2>
+                    <p class="text-3xl sm:text-5xl font-extrabold text-white">Devlogs & Progress Reports</p>
+                </div>
+                <!-- Devlog Filter Buttons -->
+                <div class="flex flex-wrap gap-2">
+                    <button onclick="filterDevlogs('all')" class="devlog-filter px-4 py-1.5 rounded-xl text-xs font-bold glass-panel bg-brand-blue text-white">All</button>
+                    <button onclick="filterDevlogs('scripts')" class="devlog-filter px-4 py-1.5 rounded-xl text-xs font-bold glass-panel text-gray-400 hover:text-white">Scripts</button>
+                    <button onclick="filterDevlogs('map')" class="devlog-filter px-4 py-1.5 rounded-xl text-xs font-bold glass-panel text-gray-400 hover:text-white">Map</button>
+                    <button onclick="filterDevlogs('vehicles')" class="devlog-filter px-4 py-1.5 rounded-xl text-xs font-bold glass-panel text-gray-400 hover:text-white">Vehicles</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="devlog-container">
+                <!-- Log 1 -->
+                <div class="devlog-card devlog-scripts p-6 rounded-2xl glass-panel border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-1 rounded-md bg-brand-blue/30 text-brand-cyan text-[10px] font-mono uppercase">Scripts</span>
+                            <span class="text-xs text-gray-500 font-mono">OCT 2026</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Sepura Airwave Radio Dispatch Completed</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Integrated custom sound frequencies, panic button alerts, and cross-channel dispatch routing for Police Scotland.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-gray-500 font-mono">Commit #4829a • GitHub Repo</div>
+                </div>
+
+                <!-- Log 2 -->
+                <div class="devlog-card devlog-map p-6 rounded-2xl glass-panel border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-1 rounded-md bg-purple-500/30 text-purple-300 text-[10px] font-mono uppercase">Map</span>
+                            <span class="text-xs text-gray-500 font-mono">SEP 2026</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Princes Street Tramline Geometry</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Completed 3D blockout for the Princes Street retail corridor and tram track power line overhead grid.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-gray-500 font-mono">Commit #3910c • GitHub Repo</div>
+                </div>
+
+                <!-- Log 3 -->
+                <div class="devlog-card devlog-vehicles p-6 rounded-2xl glass-panel border border-white/10 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-1 rounded-md bg-emerald-500/30 text-emerald-300 text-[10px] font-mono uppercase">Vehicles</span>
+                            <span class="text-xs text-gray-500 font-mono">AUG 2026</span>
+                        </div>
+                        <h4 class="text-lg font-bold text-white mb-2">Volvo V90 Chassis & ELS Lightbar</h4>
+                        <p class="text-gray-400 text-xs leading-relaxed">Configured custom suspension physics and high-intensity blue strobe ELS lighting patterns for Scottish traffic units.</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-white/5 text-[11px] text-gray-500 font-mono">Commit #2294f • GitHub Repo</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NEW SECTION 5: INTERACTIVE ROLEPLAY QUIZ SIMULATOR -->
+    <section class="py-20 px-4 max-w-4xl mx-auto" id="quiz">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-xs font-mono font-bold tracking-widest text-brand-cyan uppercase mb-2">Whitelist Readiness</h2>
+            <p class="text-3xl sm:text-5xl font-extrabold text-white">Roleplay Rules Quiz Simulator</p>
+            <p class="text-gray-400 mt-3">Test your knowledge on FRP (Fail RP), Metagaming, and Powergaming rules to earn your community badge.</p>
+        </div>
+
+        <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-white/10 relative overflow-hidden" id="quiz-container">
+            <!-- Dynamic Content loaded via JS -->
+        </div>
+    </section>
+
+    <!-- Factions & Services Section -->
+    <section class="py-20 px-4 max-w-7xl mx-auto" id="factions">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+            <h2 class="text-xs font-mono font-bold tracking-widest text-brand-cyan uppercase mb-2">Choose Your Career</h2>
+            <p class="text-3xl sm:text-5xl font-extrabold text-white">Factions & Roles</p>
+            <p class="text-gray-400 mt-3">From emergency first response to high level commerce or street life.</p>
+        </div>
+
+        <!-- Faction Selector Tabs -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-10" id="faction-tabs">
+            <button onclick="showFaction('police')" class="faction-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-panel bg-brand-blue text-white border-brand-cyan transition-all">Police Scotland</button>
+            <button onclick="showFaction('ambulance')" class="faction-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-panel text-gray-400 hover:text-white transition-all">Ambulance Service</button>
+            <button onclick="showFaction('fire')" class="faction-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-panel text-gray-400 hover:text-white transition-all">Fire & Rescue</button>
+            <button onclick="showFaction('transit')" class="faction-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-panel text-gray-400 hover:text-white transition-all">Lothian Transit</button>
+            <button onclick="showFaction('civilian')" class="faction-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-panel text-gray-400 hover:text-white transition-all">Civilian & Business</button>
+            <button onclick="showFaction('underworld')" class="faction-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-panel text-gray-400 hover:text-white transition-all">Underworld</button>
+        </div>
+
+        <!-- Faction Content Container -->
+        <div class="p-8 sm:p-12 rounded-3xl glass-panel border border-white/10 relative overflow-hidden" id="faction-card">
+            <!-- Content Injected via JS -->
+        </div>
+    </section>
+
+    <!-- Development Roadmap Timeline -->
+    <section class="py-20 px-4 bg-slate-950/60 border-t border-white/5" id="roadmap">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-mono font-bold tracking-widest text-brand-cyan uppercase mb-2">Development Cycle</h2>
+                <p class="text-3xl sm:text-5xl font-extrabold text-white">Project Roadmap</p>
+                <p class="text-gray-400 mt-3">Follow our progress as we build towards the grand release in Late 2028.</p>
+            </div>
+
+            <!-- 3 Phase Timeline Container -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- Phase 1 -->
+                <div class="p-8 rounded-2xl glass-panel border-t-4 border-amber-500 relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono uppercase tracking-wider text-amber-400 font-bold">Phase 01</span>
+                            <span class="px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-400 text-xs font-semibold">In Progress</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Alpha Framework</h3>
+                        <p class="text-xs text-gray-400 mb-6 font-mono">EST: 2026 – Early 2027</p>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> Core vehicle driving & ELS physics</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-check text-emerald-400 mt-1"></i> Initial map blocking & landmark modeling</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-spinner text-amber-400 mt-1 animate-spin"></i> Custom CAD radio system development</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="p-8 rounded-2xl glass-panel border-t-4 border-brand-cyan relative flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono uppercase tracking-wider text-brand-cyan font-bold">Phase 02</span>
+                            <span class="px-2.5 py-1 rounded-full bg-brand-cyan/10 text-brand-cyan text-xs font-semibold">Upcoming</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Closed Beta Testing</h3>
+                        <p class="text-xs text-gray-400 mb-6 font-mono">EST: Late 2027 – Mid 2028</p>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start gap-2"><i class="fa-regular fa-circle text-gray-500 mt-1"></i> Faction whitelist testing & applications</li>
+                            <li class="flex items-start gap-2"><i class="fa-regular fa-circle text-gray-500 mt-1"></i> Economy balancing & civilian jobs rollout</li>
+                            <li class="flex items-start gap-2"><i class="fa-regular fa-circle text-gray-500 mt-1"></i> Stress testing server limits (100+ players)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="p-8 rounded-2xl glass-panel border-t-4 border-purple-500 relative flex flex-col justify-between shadow-xl shadow-purple-900/10">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono uppercase tracking-wider text-purple-400 font-bold">Phase 03</span>
+                            <span class="px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 text-xs font-semibold">Grand Launch</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Public Launch</h3>
+                        <p class="text-xs text-gray-400 mb-6 font-mono">TARGET: LATE 2028</p>
+                        <ul class="space-y-3 text-sm text-gray-300">
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-rocket text-purple-400 mt-1"></i> Full public server opening on Roblox</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-star text-purple-400 mt-1"></i> Launch event & exclusive early-player rewards</li>
+                            <li class="flex items-start gap-2"><i class="fa-solid fa-arrows-rotate text-purple-400 mt-1"></i> Continuous content updates & map expansion</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub & FAQ Section -->
+    <section class="py-20 px-4 max-w-5xl mx-auto" id="faq">
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <h2 class="text-xs font-mono font-bold tracking-widest text-brand-cyan uppercase mb-2">Got Questions?</h2>
+            <p class="text-3xl sm:text-4xl font-extrabold text-white">Frequently Asked Questions</p>
+        </div>
+
+        <div class="space-y-4" id="faq-accordion">
+            <!-- FAQ Item 1 -->
+            <div class="rounded-2xl glass-panel border border-white/10 overflow-hidden">
+                <button onclick="toggleFaq(1)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center gap-4 hover:bg-white/5 transition-colors">
+                    <span>When exactly in Late 2028 will UK:RP Edinburgh launch?</span>
+                    <i id="faq-icon-1" class="fa-solid fa-plus text-brand-cyan transition-transform"></i>
+                </button>
+                <div id="faq-answer-1" class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed">
+                    We are targeting a Q4 2028 release window to allow full development, bug testing, and whitelist faction training. Specific dates will be announced on our Discord and GitHub repository updates.
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="rounded-2xl glass-panel border border-white/10 overflow-hidden">
+                <button onclick="toggleFaq(2)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center gap-4 hover:bg-white/5 transition-colors">
+                    <span>Will emergency service factions require an application?</span>
+                    <i id="faq-icon-2" class="fa-solid fa-plus text-brand-cyan transition-transform"></i>
+                </button>
+                <div id="faq-answer-2" class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed">
+                    Yes! Specialized roles such as Police Scotland Constable, Armed Response (ARV), and Scottish Fire & Rescue Officers will have application and training phases conducted via our Discord community.
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="rounded-2xl glass-panel border border-white/10 overflow-hidden">
+                <button onclick="toggleFaq(3)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center gap-4 hover:bg-white/5 transition-colors">
+                    <span>Is this game supported on mobile and console devices?</span>
+                    <i id="faq-icon-3" class="fa-solid fa-plus text-brand-cyan transition-transform"></i>
+                </button>
+                <div id="faq-answer-3" class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed">
+                    UK:RP Edinburgh is optimized primarily for PC to maintain high graphical fidelity and complex roleplay keybinds. Console and mobile optimization will be evaluated during Phase 2 Closed Beta.
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="rounded-2xl glass-panel border border-white/10 overflow-hidden">
+                <button onclick="toggleFaq(4)" class="w-full p-6 text-left font-bold text-white flex justify-between items-center gap-4 hover:bg-white/5 transition-colors">
+                    <span>Where can I track open-source scripts or dev logs?</span>
+                    <i id="faq-icon-4" class="fa-solid fa-plus text-brand-cyan transition-transform"></i>
+                </button>
+                <div id="faq-answer-4" class="hidden px-6 pb-6 text-gray-400 text-sm leading-relaxed">
+                    Our GitHub repository hosts dev logs, bug trackers, and public feedback discussions. Click the GitHub link in the navbar or community section to stay tuned!
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Call to Action Section -->
+    <section class="py-20 px-4 max-w-7xl mx-auto" id="community">
+        <div class="rounded-3xl bg-gradient-to-br from-slate-900 via-brand-blue/30 to-purple-950/40 p-8 sm:p-16 border border-brand-cyan/30 text-center relative overflow-hidden shadow-2xl">
+            <div class="absolute top-0 right-0 w-96 h-96 bg-brand-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <h2 class="text-3xl sm:text-5xl font-extrabold text-white mb-4">Be Part of the Edinburgh Legacy</h2>
+            <p class="text-gray-300 max-w-2xl mx-auto text-base sm:text-lg mb-8">
+                Join thousands of Roblox roleplay enthusiasts waiting for the release. Join our Roblox Group & Discord to secure early member rank perks!
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <button onclick="handleAction('Discord')" class="px-8 py-4 rounded-xl bg-[#5865F2] hover:bg-[#4752C4] text-white font-bold text-base shadow-xl shadow-indigo-600/30 hover:scale-105 transition-all flex items-center gap-3">
+                    <i class="fa-brands fa-discord text-xl"></i> Join Official Discord
+                </button>
+                <button onclick="handleAction('Roblox Group')" class="px-8 py-4 rounded-xl bg-white text-slate-950 hover:bg-gray-200 font-bold text-base shadow-xl hover:scale-105 transition-all flex items-center gap-3">
+                    <i class="fa-solid fa-shield text-xl text-brand-blue"></i> Join Roblox Group
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/10 text-center text-xs text-gray-500">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2 text-gray-400">
+                <span class="font-bold text-white">UK:RP EDINBURGH</span>
+                <span>— Roblox Experience Project (2028)</span>
+            </div>
+            <div>
+                Not officially affiliated with Roblox Corporation or Police Scotland. All trademarks belong to their respective owners.
+            </div>
+            <div class="flex items-center gap-4 text-base">
+                <a href="https://github.com" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-github"></i></a>
+                <a href="#community" class="hover:text-white transition-colors"><i class="fa-brands fa-discord"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive JS Logic -->
+    <script>
+        // 1. COUNTDOWN TIMER
+        // Target Date: November 30, 2028 00:00:00
+        const targetDate = new Date('November 30, 2028 00:00:00').getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('cd-days').innerText = String(days).padStart(3, '0');
+                document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+                document.getElementById('cd-minutes').innerText = String(minutes).padStart(2, '0');
+                document.getElementById('cd-seconds').innerText = String(seconds).padStart(2, '0');
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // 2. MAP TEASER GALLERY SWITCHER
+        const locationData = [
+            {
+                title: "The Royal Mile",
+                tag: "Historic Zone",
+                desc: "Cobblestone arterial street connecting Edinburgh Castle to Holyrood Palace. Prime hotspot for foot patrols and parades.",
+                img: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=1200&auto=format&fit=crop"
+            },
+            {
+                title: "Edinburgh Castle Peak",
+                tag: "High Security Zone",
+                desc: "Towering high above the city skyline. Features detailed fortress walls, ceremonial canons, and scenic viewpoints.",
+                img: "https://images.unsplash.com/photo-1565008447742-97f6f38c985c?q=80&w=1200&auto=format&fit=crop"
+            },
+            {
+                title: "Princes Street Corridor",
+                tag: "Commercial Sector",
+                desc: "Bustling retail strip featuring operating Lothian tramways, high-speed vehicle lanes, and retail storefronts.",
+                img: "https://images.unsplash.com/photo-1589710751893-f9a6770ad71b?q=80&w=1200&auto=format&fit=crop"
+            },
+            {
+                title: "St Andrew Square",
+                tag: "Civic & Financial Hub",
+                desc: "Modern hub featuring police headquarters, financial institutions, and central civilian gathering grounds.",
+                img: "https://images.unsplash.com/photo-1548625361-185e78347895?q=80&w=1200&auto=format&fit=crop"
+            }
+        ];
+
+        function switchLocation(index) {
+            const data = locationData[index];
+            const imgEl = document.getElementById('preview-image');
+            
+            imgEl.style.opacity = '0.3';
+            setTimeout(() => {
+                imgEl.src = data.img;
+                document.getElementById('preview-title').innerText = data.title;
+                document.getElementById('preview-tag').innerText = data.tag;
+                document.getElementById('preview-desc').innerText = data.desc;
+                imgEl.style.opacity = '1';
+            }, 200);
+
+            // Update UI Active State
+            const buttons = document.querySelectorAll('.location-btn');
+            buttons.forEach((btn, idx) => {
+                const chevron = btn.querySelector('i');
+                if (idx === index) {
+                    btn.classList.add('border-brand-cyan', 'bg-white/10');
+                    btn.classList.remove('border-transparent');
+                    chevron.className = 'fa-solid fa-chevron-right text-brand-cyan text-sm';
+                } else {
+                    btn.classList.remove('border-brand-cyan', 'bg-white/10');
+                    btn.classList.add('border-transparent');
+                    chevron.className = 'fa-solid fa-chevron-right text-gray-500 text-sm';
+                }
+            });
+        }
+
+        // 3. FACTION DATA TABS
+        const factionData = {
+            police: {
+                title: "Police Scotland Patrol & Response",
+                icon: "fa-shield-halved",
+                color: "text-brand-cyan",
+                badge: "Law Enforcement",
+                desc: "Maintain law and order across Edinburgh's streets. Patrol in modern Scottish police vehicles, handle emergency 999 calls, enforce traffic regulations, or respond with Armed Response Vehicles (ARV) during extreme crisis scenarios.",
+                perks: ["Custom Police Uniforms & Badges", "Functional CAD Dispatch System", "Traffic Enforcement & Radar", "Tactical Firearms Division"]
+            },
+            ambulance: {
+                title: "Scottish Ambulance Service (SAS)",
+                icon: "fa-truck-medical",
+                color: "text-emerald-400",
+                badge: "Medical Response",
+                desc: "Save lives across the city. Provide trauma care at incident scenes, operate fully equipped paramedics ambulances, and transport injured civilians to the regional hospital emergency department.",
+                perks: ["Medical Triage Mechanics", "Stretcher & Defibrillator Equipment", "Rapid Response Vehicles", "Hospital Patient Booking"]
+            },
+            fire: {
+                title: "Scottish Fire & Rescue Service",
+                icon: "fa-fire-extinguisher",
+                color: "text-rose-400",
+                badge: "Fire & Rescue",
+                desc: "Tackle structural building fires, vehicle extractions, and hazardous material spills. Operate heavy duty fire appliances and deploy water hose lines.",
+                perks: ["Dynamic Fire Simulation", "Hydraulic Rescue Cutters", "Ladder Appliances", "Search & Rescue Gear"]
+            },
+            transit: {
+                title: "Lothian Transit Operators",
+                icon: "fa-bus-simple",
+                color: "text-amber-400",
+                badge: "Public Transport",
+                desc: "Keep Edinburgh moving. Drive double-decker buses along realistic city routes or control the Princes Street tram line to transport citizens reliably.",
+                perks: ["Double-Decker Bus Models", "Scheduled Bus Stop Announcements", "Passenger Fare Ticketing", "Tram System Operations"]
+            },
+            civilian: {
+                title: "Civilian Economy & Real Estate",
+                icon: "fa-building-user",
+                color: "text-purple-400",
+                badge: "Civilian Life",
+                desc: "Build your fortune in Edinburgh. Work legitimate legal jobs, purchase luxury real estate, host car meets, or manage personal businesses.",
+                perks: ["Real Estate Properties", "Custom Vehicle Tuning Shops", "Legal Job Center", "Player-to-Player Economy"]
+            },
+            underworld: {
+                title: "Criminal Syndicate",
+                icon: "fa-mask",
+                color: "text-red-500",
+                badge: "Illicit Enterprise",
+                desc: "Operate outside the law. Form street crews, organize high-stakes bank heists, establish illegal chop shops, and evade Police Scotland pursuits.",
+                perks: ["Bank & Store Heists", "Illegal Street Racing", "Chop Shops & Black Market", "Evasion & Pursuit Mechanics"]
+            }
+        };
+
+        function showFaction(key) {
+            const f = factionData[key];
+            const container = document.getElementById('faction-card');
+            
+            // Highlight Tab Buttons
+            const tabs = document.querySelectorAll('.faction-tab');
+            tabs.forEach(tab => {
+                if (tab.getAttribute('onclick').includes(key)) {
+                    tab.className = "faction-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-panel bg-brand-blue text-white border-brand-cyan transition-all";
+                } else {
+                    tab.className = "faction-tab px-5 py-2.5 rounded-xl text-sm font-semibold glass-panel text-gray-400 hover:text-white transition-all";
+                }
+            });
+
+            container.innerHTML = `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-8">
+                        <span class="px-3 py-1 rounded-full bg-white/10 text-xs font-mono uppercase tracking-wider text-brand-cyan mb-4 inline-block">${f.badge}</span>
+                        <h3 class="text-3xl font-extrabold text-white mb-4 flex items-center gap-3">
+                            <i class="fa-solid ${f.icon} ${f.color}"></i> ${f.title}
+                        </h3>
+                        <p class="text-gray-300 text-base leading-relaxed mb-6">${f.desc}</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            ${f.perks.map(p => `
+                                <div class="flex items-center gap-2 text-sm text-gray-300">
+                                    <i class="fa-solid fa-circle-check text-brand-cyan text-xs"></i>
+                                    <span>${p}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    <div class="lg:col-span-4 flex justify-center">
+                        <div class="w-48 h-48 rounded-3xl bg-gradient-to-br from-brand-blue/30 to-purple-600/20 border border-white/10 flex items-center justify-center text-7xl ${f.color} shadow-2xl">
+                            <i class="fa-solid ${f.icon}"></i>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+        // Initialize Default Faction Card
+        showFaction('police');
+
+        // 4. FAQ ACCORDION TOGGLE
+        function toggleFaq(id) {
+            const answer = document.getElementById(`faq-answer-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.className = "fa-solid fa-minus text-brand-cyan transition-transform";
+            } else {
+                answer.classList.add('hidden');
+                icon.className = "fa-solid fa-plus text-brand-cyan transition-transform";
+            }
+        }
+
+        // 5. GENERIC BUTTON HANDLER (Message Notification instead of Alert)
+        function handleAction(type) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-6 right-6 z-50 px-6 py-4 rounded-2xl glass-panel border border-brand-cyan text-white shadow-2xl flex items-center gap-3 animate-bounce';
+            toast.innerHTML = `<i class="fa-solid fa-circle-info text-brand-cyan text-xl"></i> <span>Redirecting to <strong>${type}</strong>... (Coming Soon)</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3500);
+        }
+
+        // 6. MOBILE MENU TOGGLE
+        document.getElementById('menu-toggle').addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 7. BACKGROUND AMBIENT PARTICLES
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.opacity = Math.random() * 0.5 + 0.1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(0, 210, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.scale * Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < 50; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+    </script>
+</body>
+</html>
+        // NEW JAVASCRIPT FEATURES BELOW
+
+        // 8. VEHICLE GARAGE INSPECTOR LOGIC
+        const vehicleData = {
+            volvo: {
+                title: "Police Scotland Volvo V90",
+                specs: "Top Speed: 155 MPH | AWD Tactical | Matrix Blue ELS Lightbar",
+                badge: "Traffic Enforcement",
+                img: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=800&auto=format&fit=crop"
+            },
+            bmwx5: {
+                title: "Police Scotland BMW X5 ARV",
+                specs: "Top Speed: 160 MPH | Armed Response Unit | Heavy Steel Crash Bumper",
+                badge: "Armed Response",
+                img: "https://images.unsplash.com/photo-1555215695-3004980ad54e?q=80&w=800&auto=format&fit=crop"
+            },
+            sprinter: {
+                title: "SAS Mercedes Sprinter Ambulance",
+                specs: "Top Speed: 110 MPH | Mobile Intensive Care | Stretcher System",
+                badge: "Medical Response",
+                img: "https://images.unsplash.com/photo-1587745416684-47953f16f02f?q=80&w=800&auto=format&fit=crop"
+            },
+            scania: {
+                title: "SFRS Scania Heavy Rescue Appliance",
+                specs: "Top Speed: 95 MPH | Water Cannon | Hydraulic Cutting Equipment",
+                badge: "Fire & Rescue",
+                img: "https://images.unsplash.com/photo-1563861826100-9cb868fdbe1c?q=80&w=800&auto=format&fit=crop"
+            },
+            lothian: {
+                title: "Lothian Double-Decker Bus",
+                specs: "Top Speed: 65 MPH | 80 Passenger Capacity | Electric Hybrid",
+                badge: "Public Transit",
+                img: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=800&auto=format&fit=crop"
+            }
+        };
+
+        let currentVehicleKey = 'volvo';
+        let sirenPlaying = false;
+        let sirenInterval = null;
+
+        function selectVehicle(key) {
+            currentVehicleKey = key;
+            const data = vehicleData[key];
+
+            document.getElementById('vehicle-title').innerText = data.title;
+            document.getElementById('vehicle-specs').innerText = data.specs;
+            document.getElementById('vehicle-badge').innerText = data.badge;
+            document.getElementById('vehicle-img').src = data.img;
+
+            // Highlight Active Selector Button
+            document.querySelectorAll('.vehicle-btn').forEach(btn => {
+                btn.classList.remove('border-brand-cyan', 'bg-white/10');
+                btn.classList.add('border-transparent');
+            });
+            document.getElementById(`vbtn-${key}`).classList.add('border-brand-cyan', 'bg-white/10');
+            document.getElementById(`vbtn-${key}`).classList.remove('border-transparent');
+        }
+
+        // Synthesized Siren Tone Generator
+        function toggleSirenAudio() {
+            const btnText = document.getElementById('siren-btn-text');
+            const flash = document.getElementById('siren-flash');
+
+            if (!sirenPlaying) {
+                sirenPlaying = true;
+                btnText.innerText = "Stop Siren Audio";
+                
+                // Visual ELS Light Flasher
+                let toggle = false;
+                sirenInterval = setInterval(() => {
+                    toggle = !toggle;
+                    flash.style.backgroundColor = toggle ? 'rgba(0, 102, 255, 0.25)' : 'rgba(255, 0, 50, 0.25)';
+                }, 250);
+            } else {
+                sirenPlaying = false;
+                btnText.innerText = "Test Siren Audio";
+                clearInterval(sirenInterval);
+                flash.style.backgroundColor = 'rgba(0, 0, 0, 0)';
+            }
+        }
+
+        function updateVehicleLivery() {
+            const val = document.getElementById('livery-select').value;
+            handleAction(`Applied Livery: ${val.toUpperCase()}`);
+        }
+
+        // 9. CITY MAP EXPLORER LOGIC
+        const districtData = {
+            castle: {
+                title: "Edinburgh Castle Sector",
+                crime: "Crime Index: LOW",
+                spawn: "Armed Response Unit",
+                transit: "Princes St Tram Stop",
+                patrol: "Sector Alpha 1",
+                badge: "Historic Fortress Zone",
+                desc: "High elevation historic fortress zone. Heavy foot traffic and tourist presence. High priority security coverage provided by Police Scotland."
+            },
+            royalmile: {
+                title: "The Royal Mile Sector",
+                crime: "Crime Index: MODERATE",
+                spawn: "Old Town Beat Officers",
+                transit: "Lothian Bus Stop 14",
+                patrol: "Sector Bravo 2",
+                badge: "Commercial Arterial",
+                desc: "Historic cobblestone arterial filled with shops, pubs, and alleys. Frequent civilian gathering and street event patrols."
+            },
+            waverley: {
+                title: "Waverley Transit Station",
+                crime: "Crime Index: ELEVATED",
+                spawn: "British Transport Police",
+                transit: "Waverley Rail Hub",
+                patrol: "Sector Charlie 3",
+                badge: "Transportation Hub",
+                desc: "Central railway hub connecting Edinburgh to Glasgow and London. Prone to pickpocketing and contraband trafficking."
+            },
+            hq: {
+                title: "Police Scotland Headquarters",
+                crime: "Crime Index: SECURE",
+                spawn: "All Police Divisions",
+                transit: "St Andrew Sq Tram",
+                patrol: "Command Headquarters",
+                badge: "Law Enforcement HQ",
+                desc: "Primary dispatch and booking facility. Armory, holding cells, traffic motorpool, and incident command rooms."
+            },
+            leith: {
+                title: "Leith Docks & Harbor",
+                crime: "Crime Index: HIGH",
+                spawn: "Civilian & Underworld",
+                transit: "Ocean Terminal Tram",
+                patrol: "Sector Delta 4",
+                badge: "Industrial Port Zone",
+                desc: "Deepwater port district featuring shipping containers, industrial warehouses, and covert gang syndicate hideouts."
+            }
+        };
+
+        function selectDistrict(key) {
+            const d = districtData[key];
+            document.getElementById('district-title').innerText = d.title;
+            document.getElementById('district-crime').innerText = d.crime;
+            document.getElementById('district-spawn').innerText = d.spawn;
+            document.getElementById('district-transit').innerText = d.transit;
+            document.getElementById('district-patrol').innerText = d.patrol;
+            document.getElementById('district-badge').innerText = d.badge;
+            document.getElementById('district-desc').innerText = d.desc;
+        }
+
+        // 10. UNIFORM & OUTFIT CUSTOMIZER LOGIC
+        let currentRole = 'police';
+
+        function setOutfitRole(role) {
+            currentRole = role;
+            document.querySelectorAll('.outfit-role-btn').forEach(btn => {
+                btn.className = "outfit-role-btn py-2 px-3 rounded-xl glass-panel text-gray-400 hover:text-white font-bold text-xs";
+            });
+            document.getElementById(`role-${role}`).className = "outfit-role-btn py-2 px-3 rounded-xl glass-panel bg-brand-blue text-white font-bold text-xs";
+            updateOutfitPreview();
+        }
+
+        function updateOutfitPreview() {
+            const hatChecked = document.getElementById('gear-hat').checked;
+            const vestChecked = document.getElementById('gear-vest').checked;
+            const radioChecked = document.getElementById('gear-radio').checked;
+            const badgeChecked = document.getElementById('gear-badge').checked;
+
+            const hatLayer = document.getElementById('layer-hat');
+            const vestLayer = document.getElementById('layer-vest');
+            const badgeLayer = document.getElementById('layer-badge');
+            const radioLayer = document.getElementById('layer-radio');
+            const summary = document.getElementById('outfit-summary');
+
+            hatLayer.style.display = hatChecked ? 'block' : 'none';
+            vestLayer.style.display = vestChecked ? 'block' : 'none';
+            badgeLayer.style.display = badgeChecked ? 'inline-block' : 'none';
+            radioLayer.style.display = radioChecked ? 'inline-block' : 'none';
+
+            if (currentRole === 'police') {
+                hatLayer.innerHTML = '<i class="fa-solid fa-user-shield text-brand-cyan"></i>';
+                badgeLayer.innerText = "Police Constable #402";
+                summary.innerText = "Loadout: Police Scotland Tactical High-Vis Duty Gear";
+            } else if (currentRole === 'paramedic') {
+                hatLayer.innerHTML = '<i class="fa-solid fa-square-h text-emerald-400"></i>';
+                badgeLayer.innerText = "SAS Paramedic Triage";
+                summary.innerText = "Loadout: Scottish Ambulance Paramedic Response Uniform";
+            } else if (currentRole === 'fire') {
+                hatLayer.innerHTML = '<i class="fa-solid fa-helmet-safety text-rose-400"></i>';
+                badgeLayer.innerText = "SFRS Rescue Officer";
+                summary.innerText = "Loadout: Scottish Fire & Rescue Heavy Turnout Gear";
+            } else {
+                hatLayer.innerHTML = '<i class="fa-solid fa-hat-cowboy text-purple-400"></i>';
+                badgeLayer.innerText = "Civilian Citizen";
+                summary.innerText = "Loadout: Casual Scottish Streetwear & Jacket";
+            }
+        }
+
+        // 11. DEVLOG FILTER LOGIC
+        function filterDevlogs(tag) {
+            document.querySelectorAll('.devlog-filter').forEach(btn => {
+                btn.className = "devlog-filter px-4 py-1.5 rounded-xl text-xs font-bold glass-panel text-gray-400 hover:text-white";
+            });
+            event.target.className = "devlog-filter px-4 py-1.5 rounded-xl text-xs font-bold glass-panel bg-brand-blue text-white";
+
+            document.querySelectorAll('.devlog-card').forEach(card => {
+                if (tag === 'all' || card.classList.contains(`devlog-${tag}`)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 12. ROLEPLAY QUIZ SIMULATOR LOGIC
+        const quizQuestions = [
+            {
+                q: "What constitutes 'Fail RP' (FRP) during a traffic stop by Police Scotland?",
+                options: [
+                    "Pulling over immediately to the curb and turning off the engine.",
+                    "Driving your vehicle straight off a high cliff at 120 MPH without injury RP.",
+                    "Handing over your vehicle registration when requested by an officer."
+                ],
+                correct: 1
+            },
+            {
+                q: "What is 'Metagaming' in UK:RP Edinburgh?",
+                options: [
+                    "Using out-of-character Discord stream info to locate a suspect in-game.",
+                    "Applying for a whitelisted faction on the official website portal.",
+                    "Reporting a script bug to developers on GitHub."
+                ],
+                correct: 0
+            },
+            {
+                q: "What defines 'Powergaming' during an arrest script scenario?",
+                options: [
+                    "Roleplaying cuffing attempts using proper animation commands.",
+                    "Forcing an action on another player without allowing them a chance to respond (e.g. '/me instantly escapes cell').",
+                    "Driving a police vehicle inside speed limits."
+                ],
+                correct: 1
+            }
+        ];
+
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            if (currentQuizIndex < quizQuestions.length) {
+                const q = quizQuestions[currentQuizIndex];
+                container.innerHTML = `
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-mono uppercase text-brand-cyan">Question ${currentQuizIndex + 1} of ${quizQuestions.length}</span>
+                        <span class="text-xs font-mono text-gray-400">Passing Score: 100%</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-6">${q.q}</h3>
+                    <div class="space-y-3 mb-6">
+                        ${q.options.map((opt, idx) => `
+                            <button onclick="answerQuiz(${idx})" class="w-full text-left p-4 rounded-xl glass-panel hover:bg-brand-blue/20 hover:border-brand-cyan text-sm text-gray-200 transition-all border border-white/10">
+                                ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
+            } else {
+                const passed = quizScore === quizQuestions.length;
+                container.innerHTML = `
+                    <div class="text-center py-6">
+                        <div class="w-20 h-20 mx-auto rounded-full ${passed ? 'bg-emerald-500/20 border-emerald-400 text-emerald-400' : 'bg-rose-500/20 border-rose-400 text-rose-400'} border flex items-center justify-center text-3xl mb-4">
+                            <i class="fa-solid ${passed ? 'fa-award' : 'fa-circle-xmark'}"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2">${passed ? 'Roleplay Verification Passed!' : 'Quiz Attempt Failed'}</h3>
+                        <p class="text-sm text-gray-300 max-w-md mx-auto mb-6">
+                            ${passed ? 'You demonstrated full understanding of FRP, Metagaming, and Powergaming rules. You are eligible for Whitelist Phase 2!' : 'Review community rules on Discord and try again.'}
+                        </p>
+                        <button onclick="resetQuiz()" class="px-6 py-3 rounded-xl bg-brand-blue text-white font-bold text-sm hover:bg-sky-500 transition-all">
+                            ${passed ? 'Retake Quiz' : 'Try Again'}
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function answerQuiz(index) {
+            if (index === quizQuestions[currentQuizIndex].correct) {
+                quizScore++;
+            }
+            currentQuizIndex++;
+            renderQuiz();
+        }
+
+        function resetQuiz() {
+            currentQuizIndex = 0;
+            quizScore = 0;
+            renderQuiz();
+        }
+
+        // Render Initial Quiz State
+        renderQuiz();
+    </script>
+</body>
+</html>

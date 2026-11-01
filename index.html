@@ -184,7 +184,7 @@
                     <h3>Police Scotland Fleet</h3>
                     <p>Test response vehicle equipment and audio controls.</p>
                     <div class="siren-controls">
-                        <button onclick="toggleSiren('police-siren')" class="siren-btn">🚨 Play Police Wail</button>
+                        <button onclick="playUKPoliceSiren()" class="siren-btn">🚨 Play UK Police Siren</button>
                         <button onclick="stopAllSirens()" class="siren-btn stop-btn">🔇 Silence Siren</button>
                     </div>
                 </div>
@@ -193,7 +193,7 @@
                     <h3>Scottish Ambulance Service</h3>
                     <p>Test emergency medical transport acoustic signals.</p>
                     <div class="siren-controls">
-                        <button onclick="toggleSiren('ambulance-siren')" class="siren-btn">🚨 Play Ambulance Yelp</button>
+                        <button onclick="playUKAmbulanceSiren()" class="siren-btn">🚨 Play UK Ambulance Siren</button>
                         <button onclick="stopAllSirens()" class="siren-btn stop-btn">🔇 Silence Siren</button>
                     </div>
                 </div>
@@ -239,26 +239,39 @@
         <p>&copy; 2026 UK:RP Edinburgh. All rights reserved.</p>
     </footer>
 
-    <!-- Hidden Audio Elements (Replace src with your uploaded MP3 file names if desired) -->
-    <audio id="police-siren" src="https://actions.google.com/sounds/v1/emergency/police_siren.ogg" preload="auto"></audio>
-    <audio id="ambulance-siren" src="https://actions.google.com/sounds/v1/emergency/ambulance_siren.ogg" preload="auto"></audio>
+    <!-- Hidden Audio Elements with UK Siren Tones -->
+    <audio id="police-siren" src="https://freesound.org/data/previews/337/337049_321967-lq.mp3" loop preload="auto"></audio>
+    <audio id="ambulance-siren" src="https://freesound.org/data/previews/125/125552_2188056-lq.mp3" loop preload="auto"></audio>
 
     <!-- Audio Control Script -->
     <script>
-        function toggleSiren(sirenId) {
+        function playUKPoliceSiren() {
             stopAllSirens();
-            var audio = document.getElementById(sirenId);
-            if (audio) {
-                audio.currentTime = 0;
-                audio.play();
+            var siren = document.getElementById('police-siren');
+            if (siren) {
+                siren.currentTime = 0;
+                siren.play().catch(function(e) {
+                    console.log("Audio playback error: ", e);
+                });
+            }
+        }
+
+        function playUKAmbulanceSiren() {
+            stopAllSirens();
+            var siren = document.getElementById('ambulance-siren');
+            if (siren) {
+                siren.currentTime = 0;
+                siren.play().catch(function(e) {
+                    console.log("Audio playback error: ", e);
+                });
             }
         }
 
         function stopAllSirens() {
             var sirens = document.querySelectorAll('audio');
-            sirens.forEach(function(siren) {
-                siren.pause();
-                siren.currentTime = 0;
+            sirens.forEach(function(s) {
+                s.pause();
+                s.currentTime = 0;
             });
         }
     </script>

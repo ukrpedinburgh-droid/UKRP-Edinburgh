@@ -1,21 +1,21 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UK:RP Edinburgh | Official Website</title>
+    <title>UK:RP Edinburgh | Official Roleplay Community</title>
     <style>
         :root {
-            --bg-color: #121212;
-            --card-bg: #1e1e1e;
+            --bg-color: #0f1115;
+            --card-bg: #181b22;
             --accent-color: #00d2ff;
+            --police-blue: #0052cc;
+            --ambulance-green: #00875a;
+            --fire-red: #de350b;
             --text-color: #ffffff;
-            --text-secondary: #b0b0b0;
+            --text-secondary: #a5adba;
             --discord-blue: #5865F2;
             --discord-hover: #4752C4;
-            --danger-red: #e63946;
-            --danger-hover: #d62828;
         }
 
         body {
@@ -29,18 +29,22 @@
 
         /* Navigation Bar */
         nav {
-            background-color: #161616;
+            background-color: #111318;
             padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #222;
+            border-bottom: 2px solid #222630;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         nav .logo {
-            font-size: 1.3rem;
-            font-weight: bold;
+            font-size: 1.4rem;
+            font-weight: 800;
             color: var(--accent-color);
+            letter-spacing: 1px;
         }
 
         nav ul {
@@ -54,7 +58,7 @@
         nav a {
             color: var(--text-color);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: color 0.2s;
         }
 
@@ -62,87 +66,174 @@
             color: var(--accent-color);
         }
 
-        /* Header / Banner */
+        /* Hero / Banner Header */
         header {
-            background: linear-gradient(135deg, #1f4068, #162447);
+            background: linear-gradient(rgba(15, 17, 21, 0.75), rgba(15, 17, 21, 0.95)), 
+                        url('https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
             color: white;
             text-align: center;
-            padding: 3rem 1rem;
+            padding: 4rem 1rem;
             border-bottom: 3px solid var(--accent-color);
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.8rem;
-            letter-spacing: 1px;
+            font-size: 3.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.7);
         }
 
         header p {
             margin: 0.75rem 0 0;
             color: var(--text-secondary);
-            font-size: 1.2rem;
+            font-size: 1.25rem;
         }
 
-        /* Main Container */
+        /* Countdown Banner */
+        .countdown-container {
+            margin-top: 2rem;
+            display: inline-block;
+            background: rgba(24, 27, 34, 0.9);
+            border: 1px solid var(--accent-color);
+            border-radius: 10px;
+            padding: 1.25rem 2rem;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.2);
+        }
+
+        .countdown-title {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .countdown-timer {
+            display: flex;
+            gap: 1.25rem;
+            justify-content: center;
+        }
+
+        .time-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .time-number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #ffffff;
+            line-height: 1;
+        }
+
+        .time-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+
+        /* Layout Container */
         .container {
-            max-width: 1100px;
-            margin: 2rem auto;
-            padding: 0 1rem;
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 1.25rem;
         }
 
         section {
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
 
         h2 {
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 0.75rem;
+            margin-bottom: 1.75rem;
+            font-size: 2rem;
         }
 
-        /* Server Overview Section */
+        /* Overview Card */
         .info-card {
             background: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            padding: 1.75rem;
+            border: 1px solid #222630;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        /* Mobile-Responsive Garage Section */
-        .garage-section {
+        /* Department Cards Section */
+        .dept-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .dept-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #222630;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dept-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .dept-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .dept-card h3 {
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+
+        .dept-card.police h3 { color: #4c9aff; }
+        .dept-card.ambulance h3 { color: #57d9a3; }
+        .dept-card.fire h3 { color: #ff5630; }
+        .dept-card.civilian h3 { color: var(--accent-color); }
+
+        /* Garage & Sirens Section */
+        .garage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1.5rem;
         }
 
         .garage-card {
             background: var(--card-bg);
-            border-radius: 8px;
+            border-radius: 10px;
             padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            border: 1px solid #222630;
             text-align: center;
-        }
-
-        .garage-card h3 {
-            margin-top: 0;
-            color: var(--accent-color);
         }
 
         .siren-controls {
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
-            margin-top: 1rem;
+            margin-top: 1.25rem;
         }
 
         button.siren-btn {
-            background-color: var(--danger-red);
+            background-color: var(--fire-red);
             color: white;
             border: none;
             padding: 0.75rem 1rem;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: bold;
             transition: background 0.2s;
@@ -150,47 +241,26 @@
         }
 
         button.siren-btn:hover {
-            background-color: var(--danger-hover);
+            background-color: #bf2600;
         }
 
         button.stop-btn {
-            background-color: #4a4e69;
+            background-color: #343a46;
         }
 
         button.stop-btn:hover {
-            background-color: #22223b;
+            background-color: #222630;
         }
 
-        /* Factions / Applications Section */
-        .factions-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .faction-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .faction-card h3 {
-            margin-top: 0;
-            color: var(--accent-color);
-        }
-
+        /* Apply Buttons */
         .apply-btn {
-            display: inline-block;
+            display: block;
             background-color: var(--discord-blue);
             color: white;
             text-align: center;
             text-decoration: none;
-            padding: 0.75rem 1rem;
-            border-radius: 5px;
+            padding: 0.8rem 1rem;
+            border-radius: 6px;
             font-weight: bold;
             margin-top: 1rem;
             transition: background 0.2s;
@@ -200,27 +270,76 @@
             background-color: var(--discord-hover);
         }
 
+        /* Staff Section */
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .staff-card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            border: 1px solid #222630;
+            text-align: center;
+        }
+
+        .staff-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: #222630;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            border: 2px solid var(--accent-color);
+        }
+
+        .staff-card h3 {
+            margin: 0.5rem 0 0.25rem;
+            font-size: 1.2rem;
+        }
+
+        .staff-role {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .role-owner { background: rgba(0, 210, 255, 0.2); color: var(--accent-color); border: 1px solid var(--accent-color); }
+        .role-dev { background: rgba(87, 217, 163, 0.2); color: #57d9a3; border: 1px solid #57d9a3; }
+        .role-admin { background: rgba(255, 86, 48, 0.2); color: #ff5630; border: 1px solid #ff5630; }
+
         /* Footer */
         footer {
             text-align: center;
-            padding: 1.5rem;
-            background-color: #161616;
+            padding: 2rem;
+            background-color: #111318;
             color: var(--text-secondary);
-            border-top: 1px solid #222;
+            border-top: 1px solid #222630;
         }
 
-        /* Mobile Layout Adjustments */
+        /* Mobile Adjustments */
         @media (max-width: 600px) {
             nav {
                 flex-direction: column;
                 gap: 0.75rem;
-                text-align: center;
             }
             header h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
-            .container {
-                margin: 1rem auto;
+            .countdown-timer {
+                gap: 0.75rem;
+            }
+            .time-number {
+                font-size: 1.6rem;
             }
         }
     </style>
@@ -229,49 +348,129 @@
 
     <!-- Navigation -->
     <nav>
-        <div class="logo">UK:RP Edinburgh</div>
+        <div class="logo">UK:RP EDINBURGH</div>
         <ul>
             <li><a href="#about">About</a></li>
+            <li><a href="#departments">Departments</a></li>
             <li><a href="#garage">Garage</a></li>
-            <li><a href="#factions">Factions</a></li>
+            <li><a href="#staff">Staff</a></li>
         </ul>
     </nav>
 
-    <!-- Header / Banner -->
+    <!-- Header Banner with Countdown -->
     <header>
         <h1>UK:RP Edinburgh</h1>
-        <p>Authentic Roblox Roleplay based in Scotland's Capital City</p>
+        <p>Scotland's Premier Realistic Emergency Services Roleplay Experience</p>
+
+        <!-- Countdown Timer Block -->
+        <div class="countdown-container">
+            <div class="countdown-title">🚀 Target Release Countdown</div>
+            <div class="countdown-timer">
+                <div class="time-block">
+                    <span class="time-number" id="days">00</span>
+                    <span class="time-label">Days</span>
+                </div>
+                <div class="time-block">
+                    <span class="time-number" id="hours">00</span>
+                    <span class="time-label">Hours</span>
+                </div>
+                <div class="time-block">
+                    <span class="time-number" id="minutes">00</span>
+                    <span class="time-label">Mins</span>
+                </div>
+                <div class="time-block">
+                    <span class="time-number" id="seconds">00</span>
+                    <span class="time-label">Secs</span>
+                </div>
+            </div>
+        </div>
     </header>
 
     <div class="container">
         
         <!-- About Section -->
         <section id="about">
-            <h2>About The Community</h2>
+            <h2>About Our Community</h2>
             <div class="info-card">
-                <p>Welcome to <strong>UK:RP Edinburgh</strong>! Experience realistic Scottish emergency response and civilian roleplay in a detailed Edinburgh environment. Join Police Scotland, serve with the Scottish Ambulance Service, tackle emergency calls with the Scottish Fire and Rescue Service, or explore as a civilian.</p>
+                <p>Welcome to <strong>UK:RP Edinburgh</strong>! Based in Scotland's iconic capital city, our server delivers immersive, highly realistic British emergency response and civilian roleplay. Whether you want to enforce law and order, deliver life-saving medical care, tackle major fires, or build a business empire, Edinburgh has a place for you.</p>
             </div>
         </section>
 
-        <!-- Emergency Services Garage Section -->
+        <!-- Department Showcases -->
+        <section id="departments">
+            <h2>Emergency Departments & Factions</h2>
+            <div class="dept-grid">
+                
+                <!-- Police Scotland -->
+                <div class="dept-card police">
+                    <img src="https://images.unsplash.com/photo-1590102426319-c7526718cd70?q=80&w=800&auto=format&fit=crop" alt="Police Scotland">
+                    <div class="dept-content">
+                        <div>
+                            <h3>Police Scotland</h3>
+                            <p>Maintain order across the city, respond to 999 emergency calls, conduct traffic enforcement, and staff specialized tactical units.</p>
+                        </div>
+                        <a href="https://discord.gg/MJZPgyG32" target="_blank" class="apply-btn">Apply via Discord</a>
+                    </div>
+                </div>
+
+                <!-- Scottish Ambulance Service -->
+                <div class="dept-card ambulance">
+                    <img src="https://images.unsplash.com/photo-1587745416684-47953f16f02f?q=80&w=800&auto=format&fit=crop" alt="Scottish Ambulance Service">
+                    <div class="dept-content">
+                        <div>
+                            <h3>Scottish Ambulance Service</h3>
+                            <p>Provide emergency pre-hospital medical care, triage critically injured patients, and carry out rapid response transport.</p>
+                        </div>
+                        <a href="https://discord.gg/MJZPgyG32" target="_blank" class="apply-btn">Apply via Discord</a>
+                    </div>
+                </div>
+
+                <!-- Scottish Fire and Rescue Service -->
+                <div class="dept-card fire">
+                    <img src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?q=80&w=800&auto=format&fit=crop" alt="Scottish Fire and Rescue Service">
+                    <div class="dept-content">
+                        <div>
+                            <h3>Scottish Fire & Rescue</h3>
+                            <p>Respond to structural fires, perform complex vehicle extractions, and handle technical search and rescue operations.</p>
+                        </div>
+                        <a href="https://discord.gg/MJZPgyG32" target="_blank" class="apply-btn">Apply via Discord</a>
+                    </div>
+                </div>
+
+                <!-- Civilian & Commercial -->
+                <div class="dept-card civilian">
+                    <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?q=80&w=800&auto=format&fit=crop" alt="Civilian Sector">
+                    <div class="dept-content">
+                        <div>
+                            <h3>Civilian & Commercial</h3>
+                            <p>Run legal businesses, work local transit routes, or forge your own path in Edinburgh's dynamic civilian economy.</p>
+                        </div>
+                        <a href="https://discord.gg/MJZPgyG32" target="_blank" class="apply-btn">Join Community</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Emergency Fleet Garage -->
         <section id="garage">
-            <h2>Emergency Services Garage</h2>
-            <div class="garage-section">
+            <h2>Emergency Fleet & Siren Controls</h2>
+            <div class="garage-grid">
                 
                 <div class="garage-card">
-                    <h3>Police Scotland Fleet</h3>
-                    <p>Standard response vehicles equipped with authentic UK emergency wail sirens.</p>
+                    <h3>Police Response Unit</h3>
+                    <p>Equipped with authentic electronic UK police wail emergency sirens.</p>
                     <div class="siren-controls">
-                        <button onclick="playUKPoliceSiren()" class="siren-btn">🚨 Play UK Police Siren</button>
+                        <button onclick="playUKPoliceSiren()" class="siren-btn">🚨 Play Police Wail Siren</button>
                         <button onclick="stopAllSirens()" class="siren-btn stop-btn">🔇 Silence Siren</button>
                     </div>
                 </div>
 
                 <div class="garage-card">
-                    <h3>Scottish Ambulance Service</h3>
-                    <p>Rapid response vehicles equipped with authentic UK ambulance yelp sirens.</p>
+                    <h3>Ambulance Response Vehicle</h3>
+                    <p>Equipped with high-pitched UK medical yelp warning signals.</p>
                     <div class="siren-controls">
-                        <button onclick="playUKAmbulanceSiren()" class="siren-btn">🚨 Play UK Ambulance Siren</button>
+                        <button onclick="playUKAmbulanceSiren()" class="siren-btn">🚨 Play Ambulance Yelp Siren</button>
                         <button onclick="stopAllSirens()" class="siren-btn stop-btn">🔇 Silence Siren</button>
                     </div>
                 </div>
@@ -279,33 +478,37 @@
             </div>
         </section>
 
-        <!-- Factions & Applications Section -->
-        <section id="factions">
-            <h2>Factions & Discord Applications</h2>
-            <div class="factions-section">
+        <!-- Staff & Management Section -->
+        <section id="staff">
+            <h2>Community Staff Team</h2>
+            <div class="staff-grid">
                 
-                <div class="faction-card">
-                    <div>
-                        <h3>Police Scotland</h3>
-                        <p>Maintain law and order across Edinburgh, respond to 999 emergency calls, and keep the city safe.</p>
-                    </div>
-                    <a href="https://discord.gg/MJZPgyG32" target="_blank" class="apply-btn">Apply via Discord</a>
+                <div class="staff-card">
+                    <div class="staff-avatar">👑</div>
+                    <h3>Server Founder</h3>
+                    <p>Community Director & Lead</p>
+                    <span class="staff-role role-owner">Owner</span>
                 </div>
 
-                <div class="faction-card">
-                    <div>
-                        <h3>Scottish Ambulance Service</h3>
-                        <p>Provide critical pre-hospital care and emergency medical transport across the capital.</p>
-                    </div>
-                    <a href="https://discord.gg/MJZPgyG32" target="_blank" class="apply-btn">Apply via Discord</a>
+                <div class="staff-card">
+                    <div class="staff-avatar">💻</div>
+                    <h3>Lead Developer</h3>
+                    <p>Systems & Web Development</p>
+                    <span class="staff-role role-dev">Developer</span>
                 </div>
 
-                <div class="faction-card">
-                    <div>
-                        <h3>Scottish Fire and Rescue Service</h3>
-                        <p>Tackle structural fires, conduct technical rescues, and handle major incidents.</p>
-                    </div>
-                    <a href="https://discord.gg/MJZPgyG32" target="_blank" class="apply-btn">Apply via Discord</a>
+                <div class="staff-card">
+                    <div class="staff-avatar">🛡️</div>
+                    <h3>Head of Staff</h3>
+                    <p>Player Support & Operations</p>
+                    <span class="staff-role role-admin">Management</span>
+                </div>
+
+                <div class="staff-card">
+                    <div class="staff-avatar">🚔</div>
+                    <h3>Dept. Overseer</h3>
+                    <p>Faction Liaison</p>
+                    <span class="staff-role role-admin">Administration</span>
                 </div>
 
             </div>
@@ -315,8 +518,36 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2026 UK:RP Edinburgh. All rights reserved.</p>
+        <p>&copy; UK:RP Edinburgh. All rights reserved.</p>
     </footer>
+
+    <!-- Countdown Timer Script -->
+    <script>
+        // Set target release date to late 2029 (Dec 31, 2029)
+        const targetDate = new Date("December 31, 2029 23:59:59").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeDiff = targetDate - now;
+
+            if (timeDiff > 0) {
+                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+                document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+                document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+                document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+            } else {
+                document.querySelector(".countdown-container").innerHTML = "<div class='countdown-title' style='color:#57d9a3; font-size:1.2rem;'>🎉 GAME LIVE NOW!</div>";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 
     <!-- Web Audio Siren Synthesizer Script -->
     <script>
@@ -364,7 +595,7 @@
 
             activeOsc.start();
 
-            // UK Police Slow Wail Sweep (500Hz to 1200Hz)
+            // UK Police Slow Wail Sweep
             let duration = 2.0;
             function sweep() {
                 if (!activeOsc) return;
@@ -393,7 +624,7 @@
 
             activeOsc.start();
 
-            // UK Ambulance Fast Yelp Sweep (600Hz to 1300Hz)
+            // UK Ambulance Fast Yelp Sweep
             let duration = 0.35;
             function sweep() {
                 if (!activeOsc) return;
@@ -409,5 +640,3 @@
     </script>
 </body>
 </html>
-
-```

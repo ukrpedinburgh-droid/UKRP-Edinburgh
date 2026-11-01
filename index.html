@@ -4,251 +4,329 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UK:RP Edinburgh | Official Website</title>
-    <!-- Tailwind CSS CDN for styling -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        discord: '#5865F2',
-                        discordHover: '#4752C4',
-                        ukNavy: '#0f172a',
-                        ukBlue: '#1e3a8a',
-                        ukAccent: '#0284c7'
-                    }
-                }
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-color: #00d2ff;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+            --discord-blue: #5865F2;
+            --discord-hover: #4752C4;
+            --danger-red: #e63946;
+            --danger-hover: #d62828;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        nav {
+            background-color: #161616;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+
+        nav .logo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Header / Banner */
+        header {
+            background: linear-gradient(135deg, #1f4068, #162447);
+            color: white;
+            text-align: center;
+            padding: 3rem 1rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 0.75rem 0 0;
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        /* Server Overview Section */
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Mobile-Responsive Garage Section */
+        .garage-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .garage-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .garage-card h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+
+        .siren-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        button.siren-btn {
+            background-color: var(--danger-red);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+            font-size: 0.95rem;
+        }
+
+        button.siren-btn:hover {
+            background-color: var(--danger-hover);
+        }
+
+        button.stop-btn {
+            background-color: #4a4e69;
+        }
+
+        button.stop-btn:hover {
+            background-color: #22223b;
+        }
+
+        /* Factions / Applications Section */
+        .factions-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .faction-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .faction-card h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+
+        .apply-btn {
+            display: inline-block;
+            background-color: var(--discord-blue);
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+
+        .apply-btn:hover {
+            background-color: var(--discord-hover);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #161616;
+            color: var(--text-secondary);
+            border-top: 1px solid #222;
+        }
+
+        /* Mobile Layout Adjustments */
+        @media (max-width: 600px) {
+            nav {
+                flex-direction: column;
+                gap: 0.75rem;
+                text-align: center;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+            .container {
+                margin: 1rem auto;
             }
         }
-    </script>
-    <style>
-        /* Pulse animations for active siren state */
-        @keyframes sirenPulseRed {
-            0%, 100% { box-shadow: 0 0 15px rgba(239, 68, 68, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(239, 68, 68, 0.9); }
-        }
-        @keyframes sirenPulseBlue {
-            0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.9); }
-        }
-        .active-red { animation: sirenPulseRed 0.8s infinite; border-color: #ef4444 !important; }
-        .active-blue { animation: sirenPulseBlue 0.8s infinite; border-color: #3b82f6 !important; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 font-sans min-h-screen flex flex-col antialiased selection:bg-sky-500 selection:text-white">
+<body>
 
-    <!-- Top Navigation Bar -->
-    <nav class="bg-slate-900/90 backdrop-blur-md border-b border-slate-800 sticky top-0 z-50 px-4 py-3 sm:px-8">
-        <div class="max-w-6xl mx-auto flex flex-wrap justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-tr from-blue-700 to-sky-400 flex items-center justify-center font-black text-xl shadow-lg shadow-sky-500/20">
-                    UK
-                </div>
-                <div>
-                    <span class="font-bold text-lg tracking-wide block leading-none">UK:RP EDINBURGH</span>
-                    <span class="text-xs text-sky-400 font-medium">Scotland's Premier Roleplay</span>
-                </div>
-            </div>
-            <div class="flex items-center gap-6 text-sm font-medium text-slate-300">
-                <a href="#about" class="hover:text-sky-400 transition-colors">About</a>
-                <a href="#garage" class="hover:text-sky-400 transition-colors">Garage</a>
-                <a href="#factions" class="hover:text-sky-400 transition-colors">Factions</a>
-                <a href="https://discord.gg/YOUR_DISCORD_INVITE_HERE" target="_blank" class="bg-discord hover:bg-discordHover text-white px-4 py-2 rounded-lg font-semibold transition-all shadow-md shadow-discord/30 hover:shadow-discord/50">
-                    Discord
-                </a>
-            </div>
-        </div>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">UK:RP Edinburgh</div>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#garage">Garage</a></li>
+            <li><a href="#factions">Factions</a></li>
+        </ul>
     </nav>
 
-    <!-- Header / Hero Section -->
-    <header class="relative bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 border-b border-slate-800/80 py-16 px-4 text-center overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-sky-900/20 via-transparent to-transparent pointer-events-none"></div>
-        <div class="max-w-4xl mx-auto relative z-10">
-            <span class="bg-sky-950 text-sky-400 border border-sky-800/60 px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider mb-4 inline-block shadow-inner">
-                Official Community Hub
-            </span>
-            <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-white mt-2 mb-4 drop-shadow-sm">
-                UK:RP <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-blue-500">Edinburgh</span>
-            </h1>
-            <p class="text-slate-400 text-base sm:text-xl max-w-2xl mx-auto font-normal leading-relaxed">
-                Step into realistic emergency response and civilian roleplay based in the heart of Scotland's capital. Join Police Scotland, SAS, SFRS, or build your story as a citizen.
-            </p>
-        </div>
+    <!-- Header / Banner -->
+    <header>
+        <h1>UK:RP Edinburgh</h1>
+        <p>Authentic Roblox Roleplay based in Scotland's Capital City</p>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-6xl mx-auto px-4 py-12 flex-grow w-full space-y-16">
-
+    <div class="container">
+        
         <!-- About Section -->
-        <section id="about" class="scroll-mt-20">
-            <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-6 sm:p-8 backdrop-blur-sm">
-                <h2 class="text-2xl font-bold text-white mb-3 flex items-center gap-2">
-                    <span class="w-2 h-6 bg-sky-500 rounded-full inline-block"></span>
-                    About The Community
-                </h2>
-                <p class="text-slate-300 leading-relaxed">
-                    UK:RP Edinburgh offers an immersive Roblox roleplay experience designed around authentic Scottish protocols, emergency vehicles, and detailed city operations. Whether patrolling Princes Street with Police Scotland, tackling major fires with SFRS, or dispatching 999 medical calls, our community values high quality, friendly, and structured roleplay.
-                </p>
+        <section id="about">
+            <h2>About The Community</h2>
+            <div class="info-card">
+                <p>Welcome to <strong>UK:RP Edinburgh</strong>! Experience realistic British emergency response and civilian roleplay in a detailed Edinburgh environment. Join Police Scotland, serve with the Scottish Ambulance Service, tackle emergency calls with the Scottish Fire and Rescue Service, or explore as a civilian.</p>
             </div>
         </section>
 
-        <!-- Garage Section with Integrated Web Audio Siren Generator -->
-        <section id="garage" class="scroll-mt-20">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 border-b border-slate-800 pb-4">
-                <div>
-                    <h2 class="text-2xl font-bold text-white flex items-center gap-2">
-                        <span class="w-2 h-6 bg-red-500 rounded-full inline-block"></span>
-                        Emergency Services Garage
-                    </h2>
-                    <p class="text-slate-400 text-sm mt-1">Interactive fleet acoustic simulator powered by real-time synthesis (no external MP3 links required).</p>
-                </div>
-                <button onclick="stopAllSirens()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 self-start sm:self-auto">
-                    <span>🔇</span> Silence All Sirens
-                </button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Police Scotland Card -->
-                <div id="police-card" class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition-all shadow-lg">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <h3 class="text-xl font-bold text-sky-400">Police Scotland Fleet</h3>
-                            <span class="bg-blue-950/80 text-blue-300 border border-blue-800/60 text-xs font-semibold px-2.5 py-1 rounded-md">3 Mode Siren</span>
-                        </div>
-                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Test the authentic dual-tone emergency warning signals used on Police Scotland traffic response cars and armed response vehicles.
-                        </p>
-                    </div>
-
-                    <div class="space-y-2.5">
-                        <button onclick="playSiren('police-wail')" id="btn-police-wail" class="w-full bg-slate-800 hover:bg-sky-600 text-white font-semibold py-3 px-4 rounded-xl border border-slate-700 transition-all flex items-center justify-between group">
-                            <span class="flex items-center gap-2">🚨 UK Police Wail</span>
-                            <span class="text-xs text-slate-400 group-hover:text-white transition-colors">Slow Sweep</span>
-                        </button>
-                        <button onclick="playSiren('police-yelp')" id="btn-police-yelp" class="w-full bg-slate-800 hover:bg-sky-600 text-white font-semibold py-3 px-4 rounded-xl border border-slate-700 transition-all flex items-center justify-between group">
-                            <span class="flex items-center gap-2">🚨 UK Police Yelp</span>
-                            <span class="text-xs text-slate-400 group-hover:text-white transition-colors">Fast Tone</span>
-                        </button>
-                        <button onclick="playSiren('police-hilo')" id="btn-police-hilo" class="w-full bg-slate-800 hover:bg-sky-600 text-white font-semibold py-3 px-4 rounded-xl border border-slate-700 transition-all flex items-center justify-between group">
-                            <span class="flex items-center gap-2">🚨 UK Two-Tone (Hi-Lo)</span>
-                            <span class="text-xs text-slate-400 group-hover:text-white transition-colors">Classic Horn</span>
-                        </button>
+        <!-- Emergency Services Garage Section -->
+        <section id="garage">
+            <h2>Emergency Services Garage</h2>
+            <div class="garage-section">
+                
+                <div class="garage-card">
+                    <h3>Police Scotland Fleet</h3>
+                    <p>Standard response vehicles equipped with authentic UK emergency wail sirens.</p>
+                    <div class="siren-controls">
+                        <button onclick="playUKPoliceSiren()" class="siren-btn">🚨 Play UK Police Siren</button>
+                        <button onclick="stopAllSirens()" class="siren-btn stop-btn">🔇 Silence Siren</button>
                     </div>
                 </div>
 
-                <!-- Scottish Ambulance Service Card -->
-                <div id="ambulance-card" class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition-all shadow-lg">
-                    <div>
-                        <div class="flex justify-between items-start mb-3">
-                            <h3 class="text-xl font-bold text-amber-400">Scottish Ambulance Service</h3>
-                            <span class="bg-amber-950/80 text-amber-300 border border-amber-800/60 text-xs font-semibold px-2.5 py-1 rounded-md">Medical Siren</span>
-                        </div>
-                        <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                            Simulate high-priority emergency medical transit acoustic warnings for rapid response units and double-crewed ambulances.
-                        </p>
-                    </div>
-
-                    <div class="space-y-2.5">
-                        <button onclick="playSiren('sas-wail')" id="btn-sas-wail" class="w-full bg-slate-800 hover:bg-amber-600 text-white font-semibold py-3 px-4 rounded-xl border border-slate-700 transition-all flex items-center justify-between group">
-                            <span class="flex items-center gap-2">🚨 SAS Response Wail</span>
-                            <span class="text-xs text-slate-400 group-hover:text-white transition-colors">Priority Mode</span>
-                        </button>
-                        <button onclick="playSiren('sas-yelp')" id="btn-sas-yelp" class="w-full bg-slate-800 hover:bg-amber-600 text-white font-semibold py-3 px-4 rounded-xl border border-slate-700 transition-all flex items-center justify-between group">
-                            <span class="flex items-center gap-2">🚨 SAS Intersection Yelp</span>
-                            <span class="text-xs text-slate-400 group-hover:text-white transition-colors">Rapid Clearing</span>
-                        </button>
+                <div class="garage-card">
+                    <h3>Scottish Ambulance Service</h3>
+                    <p>Rapid response vehicles equipped with authentic UK ambulance yelp sirens.</p>
+                    <div class="siren-controls">
+                        <button onclick="playUKAmbulanceSiren()" class="siren-btn">🚨 Play UK Ambulance Siren</button>
+                        <button onclick="stopAllSirens()" class="siren-btn stop-btn">🔇 Silence Siren</button>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- Factions Section -->
-        <section id="factions" class="scroll-mt-20">
-            <div class="mb-6 border-b border-slate-800 pb-4">
-                <h2 class="text-2xl font-bold text-white flex items-center gap-2">
-                    <span class="w-2 h-6 bg-discord rounded-full inline-block"></span>
-                    Factions & Applications
-                </h2>
-                <p class="text-slate-400 text-sm mt-1">Apply directly via our official Discord community channels to join a whitelisted division.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Police Scotland Card -->
-                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition-all shadow-lg group">
+        <!-- Factions & Applications Section -->
+        <section id="factions">
+            <h2>Factions & Discord Applications</h2>
+            <div class="factions-section">
+                
+                <div class="faction-card">
                     <div>
-                        <div class="w-12 h-12 bg-blue-950 border border-blue-800 rounded-xl flex items-center justify-center text-2xl mb-4 text-blue-400 group-hover:scale-105 transition-transform">
-                            👮‍♂️
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Police Scotland</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            Maintain law and order, conduct traffic stops, respond to armed incidents, and protect the citizens of Edinburgh.
-                        </p>
+                        <h3>Police Scotland</h3>
+                        <p>Maintain law and order across Edinburgh, respond to 999 emergency calls, and keep the city safe.</p>
                     </div>
-                    <a href="https://discord.gg/YOUR_DISCORD_INVITE_HERE" target="_blank" class="w-full bg-discord hover:bg-discordHover text-white font-semibold py-3 px-4 rounded-xl text-center transition-all flex items-center justify-center gap-2 shadow-md shadow-discord/20">
-                        <span>Apply via Discord</span>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
+                    <a href="https://discord.gg/YOUR_DISCORD_INVITE_HERE" target="_blank" class="apply-btn">Apply via Discord</a>
                 </div>
 
-                <!-- Scottish Ambulance Service -->
-                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition-all shadow-lg group">
+                <div class="faction-card">
                     <div>
-                        <div class="w-12 h-12 bg-amber-950 border border-amber-800 rounded-xl flex items-center justify-center text-2xl mb-4 text-amber-400 group-hover:scale-105 transition-transform">
-                            🚑
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Scottish Ambulance</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            Provide critical pre-hospital trauma emergency medical treatment and transport across the capital region.
-                        </p>
+                        <h3>Scottish Ambulance Service</h3>
+                        <p>Provide critical pre-hospital care and emergency medical transport across the capital.</p>
                     </div>
-                    <a href="https://discord.gg/YOUR_DISCORD_INVITE_HERE" target="_blank" class="w-full bg-discord hover:bg-discordHover text-white font-semibold py-3 px-4 rounded-xl text-center transition-all flex items-center justify-center gap-2 shadow-md shadow-discord/20">
-                        <span>Apply via Discord</span>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
+                    <a href="https://discord.gg/YOUR_DISCORD_INVITE_HERE" target="_blank" class="apply-btn">Apply via Discord</a>
                 </div>
 
-                <!-- Scottish Fire & Rescue Service -->
-                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-slate-700 transition-all shadow-lg group">
+                <div class="faction-card">
                     <div>
-                        <div class="w-12 h-12 bg-red-950 border border-red-800 rounded-xl flex items-center justify-center text-2xl mb-4 text-red-400 group-hover:scale-105 transition-transform">
-                            🚒
-                        </div>
-                        <h3 class="text-xl font-bold text-white mb-2">Fire & Rescue Service</h3>
-                        <p class="text-slate-400 text-sm leading-relaxed mb-6">
-                            Tackle structural building fires, perform technical road collision rescues, and manage hazardous scenes.
-                        </p>
+                        <h3>Scottish Fire and Rescue Service</h3>
+                        <p>Tackle structural fires, conduct technical rescues, and handle major incidents.</p>
                     </div>
-                    <a href="https://discord.gg/YOUR_DISCORD_INVITE_HERE" target="_blank" class="w-full bg-discord hover:bg-discordHover text-white font-semibold py-3 px-4 rounded-xl text-center transition-all flex items-center justify-center gap-2 shadow-md shadow-discord/20">
-                        <span>Apply via Discord</span>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    </a>
+                    <a href="https://discord.gg/YOUR_DISCORD_INVITE_HERE" target="_blank" class="apply-btn">Apply via Discord</a>
                 </div>
+
             </div>
         </section>
 
-    </main>
+    </div>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 border-t border-slate-800/80 py-8 text-center text-slate-500 text-sm mt-auto">
-        <div class="max-w-6xl mx-auto px-4">
-            <p>&copy; 2026 UK:RP Edinburgh. Built for community roleplay on GitHub Pages.</p>
-        </div>
+    <footer>
+        <p>&copy; 2026 UK:RP Edinburgh. All rights reserved.</p>
     </footer>
 
-    <!-- Web Audio API Real-Time Siren Synthesizer Script -->
+    <!-- Web Audio Siren Synthesizer Script -->
     <script>
         let audioCtx = null;
-        let activeOscillator = null;
-        let secondaryOscillator = null;
-        let activeLFO = null;
-        let activeInterval = null;
-        let currentSirenType = null;
+        let activeOsc = null;
+        let activeGain = null;
+        let activeTimer = null;
 
-        // Initialize Web Audio Context on first user tap/click
-        function initAudioContext() {
+        function initAudio() {
             if (!audioCtx) {
-                const AudioContext = window.AudioContext || window.webkitAudioContext;
-                audioCtx = new AudioContext();
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
@@ -256,133 +334,76 @@
         }
 
         function stopAllSirens() {
-            if (activeOscillator) {
-                try { activeOscillator.stop(); activeOscillator.disconnect(); } catch(e){}
-                activeOscillator = null;
+            if (activeTimer) {
+                clearInterval(activeTimer);
+                activeTimer = null;
             }
-            if (secondaryOscillator) {
-                try { secondaryOscillator.stop(); secondaryOscillator.disconnect(); } catch(e){}
-                secondaryOscillator = null;
+            if (activeGain && audioCtx) {
+                activeGain.gain.setValueAtTime(0, audioCtx.currentTime);
             }
-            if (activeLFO) {
-                try { activeLFO.stop(); activeLFO.disconnect(); } catch(e){}
-                activeLFO = null;
+            if (activeOsc) {
+                try { activeOsc.stop(); } catch(e) {}
+                activeOsc.disconnect();
+                activeOsc = null;
             }
-            if (activeInterval) {
-                clearInterval(activeInterval);
-                activeInterval = null;
-            }
-            currentSirenType = null;
-
-            // Reset visual active states on cards
-            document.getElementById('police-card').classList.remove('active-blue');
-            document.getElementById('ambulance-card').classList.remove('active-red');
-            
-            // Reset button styles
-            const buttons = document.querySelectorAll('#garage button');
-            buttons.forEach(btn => {
-                if(!btn.classList.contains('stop-btn')) {
-                    btn.classList.remove('bg-sky-600', 'bg-amber-600', 'bg-red-600');
-                    btn.classList.add('bg-slate-800');
-                }
-            });
         }
 
-        function playSiren(type) {
-            initAudioContext();
-
-            // If clicking the same active siren, turn it off
-            if (currentSirenType === type) {
-                stopAllSirens();
-                return;
-            }
-
+        function playUKPoliceSiren() {
+            initAudio();
             stopAllSirens();
-            currentSirenType = type;
 
-            const masterGain = audioCtx.createGain();
-            masterGain.gain.setValueAtTime(0.18, audioCtx.currentTime); // Safe volume level
-            masterGain.connect(audioCtx.destination);
+            activeOsc = audioCtx.createOscillator();
+            activeGain = audioCtx.createGain();
 
-            if (type === 'police-wail' || type === 'sas-wail') {
-                // UK Police/SAS Slow Wail (Modulated sweep between 600Hz and 1400Hz)
-                const osc = audioCtx.createOscillator();
-                const lfo = audioCtx.createOscillator();
-                const lfoGain = audioCtx.createGain();
+            activeOsc.type = 'sawtooth';
+            activeGain.gain.setValueAtTime(0.2, audioCtx.currentTime);
 
-                osc.type = 'sawtooth';
-                osc.frequency.value = 950; // Base frequency
+            activeOsc.connect(activeGain);
+            activeGain.connect(audioCtx.destination);
 
-                lfo.type = 'sine';
-                lfo.frequency.value = 0.25; // Slow 4-second cycle sweep
-                lfoGain.gain.value = 450; // Pitch range depth
+            activeOsc.start();
 
-                lfo.connect(osc.frequency);
-                osc.connect(masterGain);
-
-                lfo.start();
-                osc.start();
-
-                activeOscillator = osc;
-                activeLFO = lfo;
-
-                highlightCard(type.startsWith('police') ? 'police' : 'ambulance', type);
-
-            } else if (type === 'police-yelp' || type === 'sas-yelp') {
-                // UK Fast Yelp (Fast sweep between 650Hz and 1500Hz)
-                const osc = audioCtx.createOscillator();
-                const lfo = audioCtx.createOscillator();
-                const lfoGain = audioCtx.createGain();
-
-                osc.type = 'sawtooth';
-                osc.frequency.value = 1000;
-
-                lfo.type = 'sine';
-                lfo.frequency.value = 3.5; // Fast pitch modulation cycle
-                lfoGain.gain.value = 400;
-
-                lfo.connect(osc.frequency);
-                osc.connect(masterGain);
-
-                lfo.start();
-                osc.start();
-
-                activeOscillator = osc;
-                activeLFO = lfo;
-
-                highlightCard(type.startsWith('police') ? 'police' : 'ambulance', type);
-
-            } else if (type === 'police-hilo') {
-                // Classic British Two-Tone Hi-Lo (600Hz and 800Hz alternating)
-                const osc = audioCtx.createOscillator();
-                osc.type = 'square';
-                osc.frequency.value = 800;
-                osc.connect(masterGain);
-                osc.start();
-
-                let isHigh = true;
-                activeInterval = setInterval(() => {
-                    if (osc && audioCtx) {
-                        isHigh = !isHigh;
-                        osc.frequency.setValueAtTime(isHigh ? 800 : 600, audioCtx.currentTime);
-                    }
-                }, 480); // Alternate every ~0.5s
-
-                activeOscillator = osc;
-                highlightCard('police', type);
+            // UK Police Slow Wail Sweep (500Hz to 1200Hz)
+            let duration = 2.0; // 2 seconds sweep
+            function sweep() {
+                if (!activeOsc) return;
+                let now = audioCtx.currentTime;
+                activeOsc.frequency.setValueAtTime(500, now);
+                activeOsc.frequency.linearRampToValueAtTime(1200, now + duration / 2);
+                activeOsc.frequency.linearRampToValueAtTime(500, now + duration);
             }
+
+            sweep();
+            activeTimer = setInterval(sweep, duration * 1000);
         }
 
-        function highlightCard(cardType, buttonId) {
-            const card = document.getElementById(cardType + '-card');
-            if (card) {
-                card.classList.add(cardType === 'police' ? 'active-blue' : 'active-red');
+        function playUKAmbulanceSiren() {
+            initAudio();
+            stopAllSirens();
+
+            activeOsc = audioCtx.createOscillator();
+            activeGain = audioCtx.createGain();
+
+            activeOsc.type = 'sawtooth';
+            activeGain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+
+            activeOsc.connect(activeGain);
+            activeGain.connect(audioCtx.destination);
+
+            activeOsc.start();
+
+            // UK Ambulance Fast Yelp Sweep (600Hz to 1300Hz)
+            let duration = 0.35; // 0.35 second fast sweep
+            function sweep() {
+                if (!activeOsc) return;
+                let now = audioCtx.currentTime;
+                activeOsc.frequency.setValueAtTime(600, now);
+                activeOsc.frequency.linearRampToValueAtTime(1300, now + duration / 2);
+                activeOsc.frequency.linearRampToValueAtTime(600, now + duration);
             }
-            const activeBtn = document.getElementById('btn-' + buttonId);
-            if (activeBtn) {
-                activeBtn.classList.remove('bg-slate-800');
-                activeBtn.classList.add(cardType === 'police' ? 'bg-sky-600' : 'bg-amber-600');
-            }
+
+            sweep();
+            activeTimer = setInterval(sweep, duration * 1000);
         }
     </script>
 </body>

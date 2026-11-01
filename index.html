@@ -1,1128 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UK:RP Edinburgh | Roblox Roleplay</title>
-  
-  <!-- Fonts & Icons -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    :root {
-      --bg-dark: #080b10;
-      --bg-card: #0f1520;
-      --bg-card-hover: #162030;
-      --accent-cyan: #00f0ff;
-      --accent-blue: #0072ff;
-      --accent-gold: #ffb700;
-      --accent-red: #ff2a5f;
-      --text-main: #f0f4f8;
-      --text-muted: #8a99ad;
-      --border-glow: rgba(0, 240, 255, 0.2);
-      --glass-bg: rgba(15, 21, 32, 0.85);
-      --font-heading: 'Orbitron', sans-serif;
-      --font-sub: 'Rajdhani', sans-serif;
-      --font-body: 'Inter', sans-serif;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      font-family: var(--font-body);
-      line-height: 1.6;
-      overflow-x: hidden;
-      background-image: 
-        radial-gradient(circle at 10% 20%, rgba(0, 240, 255, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(0, 114, 255, 0.05) 0%, transparent 40%);
-    }
-
-    /* Scrollbar */
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-    ::-webkit-scrollbar-track {
-      background: var(--bg-dark);
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #1a2638;
-      border-radius: 4px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--accent-cyan);
-    }
-
-    /* Container */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    /* Navigation */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      z-index: 1000;
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(0, 240, 255, 0.1);
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 75px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-
-    .logo-badge {
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-      color: #000;
-      font-family: var(--font-heading);
-      font-weight: 900;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-    }
-
-    .logo-text {
-      font-family: var(--font-heading);
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text-main);
-      letter-spacing: 1px;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 25px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-family: var(--font-sub);
-      font-weight: 600;
-      font-size: 1.1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-    }
-
-    .nav-links a:hover, .nav-links a.active {
-      color: var(--accent-cyan);
-      text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
-    }
-
-    .btn-discord {
-      background: linear-gradient(135deg, #5865F2, #404EED);
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-family: var(--font-sub);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-discord:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.5);
-    }
-
-    /* Hero Section */
-    .hero {
-      padding: 160px 0 100px;
-      text-align: center;
-      position: relative;
-    }
-
-    .hero-tag {
-      display: inline-block;
-      padding: 6px 16px;
-      background: rgba(0, 240, 255, 0.1);
-      border: 1px solid var(--accent-cyan);
-      border-radius: 20px;
-      color: var(--accent-cyan);
-      font-family: var(--font-sub);
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-size: 0.9rem;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 {
-      font-family: var(--font-heading);
-      font-size: 3.5rem;
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-      background: linear-gradient(180deg, #ffffff 0%, #8a99ad 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: 0 auto 40px;
-      color: var(--text-muted);
-      font-size: 1.15rem;
-    }
-
-    .countdown-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-glow);
-      border-radius: 12px;
-      padding: 25px;
-      max-width: 600px;
-      margin: 0 auto 40px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .countdown-title {
-      font-family: var(--font-sub);
-      font-weight: 700;
-      color: var(--accent-gold);
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 15px;
-      font-size: 0.95rem;
-    }
-
-    .countdown-timer {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-
-    .time-unit {
-      text-align: center;
-      min-width: 80px;
-    }
-
-    .time-val {
-      font-family: var(--font-heading);
-      font-size: 2.2rem;
-      font-weight: 700;
-      color: var(--accent-cyan);
-      display: block;
-    }
-
-    .time-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
-      color: #000;
-      padding: 14px 28px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-family: var(--font-sub);
-      font-weight: 700;
-      font-size: 1.1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      border: none;
-      cursor: pointer;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0, 240, 255, 0.4);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text-main);
-      padding: 14px 28px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-family: var(--font-sub);
-      font-weight: 700;
-      font-size: 1.1rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: all 0.3s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--accent-cyan);
-    }
-
-    /* Section Styling */
-    section {
-      padding: 80px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-
-    .section-title h2 {
-      font-family: var(--font-heading);
-      font-size: 2.2rem;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .section-title p {
-      color: var(--text-muted);
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    /* Jobs & Factions Grid */
-    .jobs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-    }
-
-    .job-card {
-      background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 30px;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .job-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--accent-cyan);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    }
-
-    .job-badge {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-family: var(--font-sub);
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .badge-whitelisted {
-      background: rgba(255, 183, 0, 0.15);
-      color: var(--accent-gold);
-      border: 1px solid var(--accent-gold);
-    }
-
-    .badge-open {
-      background: rgba(0, 240, 255, 0.15);
-      color: var(--accent-cyan);
-      border: 1px solid var(--accent-cyan);
-    }
-
-    .job-icon {
-      font-size: 2.5rem;
-      color: var(--accent-cyan);
-      margin-bottom: 20px;
-    }
-
-    .job-card h3 {
-      font-family: var(--font-heading);
-      font-size: 1.3rem;
-      margin-bottom: 10px;
-    }
-
-    .job-card p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      margin-bottom: 20px;
-    }
-
-    /* Garage Inspector */
-    .garage-wrapper {
-      background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 30px;
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 30px;
-    }
-
-    .garage-list {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .garage-btn {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      color: var(--text-main);
-      padding: 15px;
-      border-radius: 8px;
-      text-align: left;
-      font-family: var(--font-sub);
-      font-weight: 600;
-      font-size: 1.1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .garage-btn:hover, .garage-btn.active {
-      background: rgba(0, 240, 255, 0.1);
-      border-color: var(--accent-cyan);
-      color: var(--accent-cyan);
-    }
-
-    .garage-display {
-      background: #05080c;
-      border-radius: 8px;
-      padding: 25px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      border: 1px solid rgba(0, 240, 255, 0.1);
-    }
-
-    .vehicle-info h3 {
-      font-family: var(--font-heading);
-      font-size: 1.6rem;
-      color: var(--accent-cyan);
-      margin-bottom: 5px;
-    }
-
-    .vehicle-faction {
-      color: var(--accent-gold);
-      font-family: var(--font-sub);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-size: 0.9rem;
-      margin-bottom: 15px;
-    }
-
-    .vehicle-specs {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
-      margin: 20px 0;
-    }
-
-    .spec-item {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 12px;
-      border-radius: 6px;
-      text-align: center;
-    }
-
-    .spec-label {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      display: block;
-    }
-
-    .spec-val {
-      font-family: var(--font-sub);
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: var(--text-main);
-    }
-
-    .siren-btn {
-      background: var(--accent-red);
-      color: #fff;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 6px;
-      font-family: var(--font-sub);
-      font-weight: 700;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-      align-self: flex-start;
-    }
-
-    .siren-btn:hover {
-      box-shadow: 0 0 15px rgba(255, 42, 95, 0.6);
-    }
-
-    /* Whitelist Quiz Simulator */
-    .quiz-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-glow);
-      border-radius: 12px;
-      padding: 35px;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .quiz-question {
-      font-family: var(--font-heading);
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-    }
-
-    .quiz-options {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 25px;
-    }
-
-    .quiz-option {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      padding: 15px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-size: 0.95rem;
-    }
-
-    .quiz-option:hover {
-      border-color: var(--accent-cyan);
-      background: rgba(0, 240, 255, 0.05);
-    }
-
-    .quiz-option.selected {
-      border-color: var(--accent-cyan);
-      background: rgba(0, 240, 255, 0.15);
-      color: var(--accent-cyan);
-    }
-
-    .quiz-result {
-      display: none;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .quiz-result h3 {
-      font-family: var(--font-heading);
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
-
-    /* FAQ Accordion */
-    .faq-wrapper {
-      max-width: 800px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .faq-item {
-      background: var(--bg-card);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .faq-header {
-      padding: 20px;
-      font-family: var(--font-sub);
-      font-weight: 700;
-      font-size: 1.15rem;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s ease;
-    }
-
-    .faq-header:hover {
-      color: var(--accent-cyan);
-    }
-
-    .faq-content {
-      padding: 0 20px 20px;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      display: none;
-    }
-
-    .faq-item.active .faq-content {
-      display: block;
-    }
-
-    .faq-item.active .faq-header i {
-      transform: rotate(180deg);
-      color: var(--accent-cyan);
-    }
-
-    /* Footer */
-    footer {
-      background: #040609;
-      padding: 50px 0 30px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      text-align: center;
-    }
-
-    .footer-logo {
-      font-family: var(--font-heading);
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 15px;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 25px;
-      list-style: none;
-    }
-
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--accent-cyan);
-    }
-
-    .copyright {
-      color: var(--text-muted);
-      font-size: 0.85rem;
-    }
-
-    /* Mobile Responsive */
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-      .garage-wrapper {
-        grid-template-columns: 1fr;
-      }
-      .countdown-timer {
-        gap: 10px;
-      }
-      .time-unit {
-        min-width: 60px;
-      }
-      .time-val {
-        font-size: 1.6rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK:RP Edinburgh</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --accent-color: #00d2ff;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1f4068, #162447);
+            color: white;
+            text-align: center;
+            padding: 2.5rem 1rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            margin: 0.5rem 0 0;
+            color: var(--text-secondary);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        section {
+            margin-bottom: 3rem;
+        }
+
+        h2 {
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        /* Responsive Garage Section Layout */
+        .garage-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .garage-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            text-align: center;
+        }
+
+        .garage-card h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+
+        .siren-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        button.siren-btn {
+            background-color: #e63946;
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        button.siren-btn:hover {
+            background-color: #d62828;
+        }
+
+        button.stop-btn {
+            background-color: #4a4e69;
+        }
+
+        button.stop-btn:hover {
+            background-color: #22223b;
+        }
+
+        /* Factions Section Layout */
+        .factions-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .faction-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .faction-card h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+
+        .apply-btn {
+            display: inline-block;
+            background-color: #5865F2; /* Discord Blurple */
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+
+        .apply-btn:hover {
+            background-color: #4752C4;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #161616;
+            color: var(--text-secondary);
+            border-top: 1px solid #222;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            .container {
+                margin: 1rem auto;
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Header / Navigation -->
-  <header>
-    <div class="container">
-      <nav>
-        <a href="#" class="logo">
-          <span class="logo-badge">UK:RP</span>
-          <span class="logo-text">EDINBURGH</span>
-        </a>
-        <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#jobs">Factions</a></li>
-          <li><a href="#garage">Garage</a></li>
-          <li><a href="#quiz">Whitelist</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-        <a href="https://discord.gg/ZGgNNJpBtk" target="_blank" class="btn-discord">
-          <i class="fa-brands fa-discord"></i> Join Discord
-        </a>
-      </nav>
-    </div>
-  </header>
+    <header>
+        <h1>UK:RP Edinburgh</h1>
+        <p>Authentic Roleplay based in Scotland's Capital</p>
+    </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
     <div class="container">
-      <span class="hero-tag">Official Teaser Portal</span>
-      <h1>Experience The Real <span>Edinburgh RP</span></h1>
-      <p>A next-generation Scottish roleplay experience on Roblox. Police Scotland, Fire & Rescue, SAS Paramedics, and Civilian life, crafted with accuracy.</p>
-      
-      <div class="countdown-box">
-        <div class="countdown-title"><i class="fa-solid fa-clock"></i> Targeted Launch Window: Late 2029 – Late 2032</div>
-        <div class="countdown-timer">
-          <div class="time-unit">
-            <span class="time-val" id="days">000</span>
-            <span class="time-label">Days</span>
-          </div>
-          <div class="time-unit">
-            <span class="time-val" id="hours">00</span>
-            <span class="time-label">Hours</span>
-          </div>
-          <div class="time-unit">
-            <span class="time-val" id="mins">00</span>
-            <span class="time-label">Minutes</span>
-          </div>
-          <div class="time-unit">
-            <span class="time-val" id="secs">00</span>
-            <span class="time-label">Seconds</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="hero-actions">
-        <a href="https://discord.gg/ZGgNNJpBtk" target="_blank" class="btn-primary">
-          <i class="fa-brands fa-discord"></i> Join Discord Community
-        </a>
-        <a href="#jobs" class="btn-secondary">Explore Factions</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- About / Dev Hardware Notice -->
-  <section id="about">
-    <div class="container">
-      <div class="section-title">
-        <h2>Development Status</h2>
-        <p>Current roadmap & project groundwork for UK:RP Edinburgh</p>
-      </div>
-      <div style="background: var(--bg-card); border: 1px solid rgba(0, 240, 255, 0.1); padding: 30px; border-radius: 12px; max-width: 800px; margin: 0 auto; text-align: center;">
-        <i class="fa-solid fa-laptop-code" style="font-size: 2.5rem; color: var(--accent-cyan); margin-bottom: 15px;"></i>
-        <h3 style="font-family: var(--font-heading); margin-bottom: 10px;">Pre-Production Phase Active</h3>
-        <p style="color: var(--text-muted);">
-          Our community infrastructure, Discord server, and web systems are officially fully set up! Active game studio map building and scripting will commence once our desktop hardware setup is online. Faction leadership pre-applications and community roleplay events are active in Discord.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Jobs & Factions Section -->
-  <section id="jobs">
-    <div class="container">
-      <div class="section-title">
-        <h2>Factions & Careers</h2>
-        <p>Choose your pathway in the city of Edinburgh</p>
-      </div>
-      <div class="jobs-grid">
         
-        <div class="job-card">
-          <span class="job-badge badge-whitelisted">Whitelisted</span>
-          <i class="fa-solid fa-shield-halved job-icon"></i>
-          <h3>Police Scotland</h3>
-          <p>Maintain law and order across the city. Conduct traffic stops, respond to 999 emergencies, and join specialist divisions like ARV or Response.</p>
-          <a href="https://discord.gg/ZGgNNJpBtk" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-family: var(--font-sub); font-weight: 700;">Apply via Discord <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
+        <!-- Garage Section -->
+        <section>
+            <h2>Emergency Services Garage</h2>
+            <div class="garage-section">
+                
+                <div class="garage-card">
+                    <h3>Police Scotland Fleet</h3>
+                    <p>Test response vehicle equipment and audio controls.</p>
+                    <div class="siren-controls">
+                        <button onclick="toggleSiren('police-siren')" class="siren-btn">🚨 Play Police Wail</button>
+                        <button onclick="stopAllSirens()" class="siren-btn stop-btn">🔇 Silence Siren</button>
+                    </div>
+                </div>
 
-        <div class="job-card">
-          <span class="job-badge badge-whitelisted">Whitelisted</span>
-          <i class="fa-solid fa-truck-medical job-icon"></i>
-          <h3>SAS Paramedics</h3>
-          <p>Provide emergency medical aid across Edinburgh. Operate rapid response vehicles and emergency ambulances during critical calls.</p>
-          <a href="https://discord.gg/ZGgNNJpBtk" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-family: var(--font-sub); font-weight: 700;">Apply via Discord <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
+                <div class="garage-card">
+                    <h3>Scottish Ambulance Service</h3>
+                    <p>Test emergency medical transport acoustic signals.</p>
+                    <div class="siren-controls">
+                        <button onclick="toggleSiren('ambulance-siren')" class="siren-btn">🚨 Play Ambulance Yelp</button>
+                        <button onclick="stopAllSirens()" class="siren-btn stop-btn">🔇 Silence Siren</button>
+                    </div>
+                </div>
 
-        <div class="job-card">
-          <span class="job-badge badge-whitelisted">Whitelisted</span>
-          <i class="fa-solid fa-fire-extinguisher job-icon"></i>
-          <h3>Scottish Fire & Rescue</h3>
-          <p>Tackle structural fires, perform vehicle extrications, and execute heavy rescue operations using authentic appliances.</p>
-          <a href="https://discord.gg/ZGgNNJpBtk" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-family: var(--font-sub); font-weight: 700;">Apply via Discord <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-
-        <div class="job-card">
-          <span class="job-badge badge-open">Open Access</span>
-          <i class="fa-solid fa-user-group job-icon"></i>
-          <h3>Civilian & Criminal</h3>
-          <p>Build your own storyline. Work legal jobs, run local businesses, or forge underground criminal networks in the heart of Scotland.</p>
-          <a href="https://discord.gg/ZGgNNJpBtk" target="_blank" style="color: var(--accent-cyan); text-decoration: none; font-family: var(--font-sub); font-weight: 700;">Join Discord <i class="fa-solid fa-arrow-right"></i></a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Garage Inspector -->
-  <section id="garage">
-    <div class="container">
-      <div class="section-title">
-        <h2>Vehicle Inspector</h2>
-        <p>Preview emergency vehicles planned for the game fleet</p>
-      </div>
-
-      <div class="garage-wrapper">
-        <div class="garage-list">
-          <button class="garage-btn active" onclick="selectVehicle(0)">
-            <i class="fa-solid fa-car-side"></i> Volvo V90 Response
-          </button>
-          <button class="garage-btn" onclick="selectVehicle(1)">
-            <i class="fa-solid fa-shield-cat"></i> BMW X5 ARV
-          </button>
-          <button class="garage-btn" onclick="selectVehicle(2)">
-            <i class="fa-solid fa-ambulance"></i> SAS Sprinter Ambulance
-          </button>
-          <button class="garage-btn" onclick="selectVehicle(3)">
-            <i class="fa-solid fa-truck-fire"></i> SFRS Scania Appliance
-          </button>
-        </div>
-
-        <div class="garage-display">
-          <div class="vehicle-info">
-            <span class="vehicle-faction" id="v-faction">Police Scotland</span>
-            <h3 id="v-name">Volvo V90 Estate</h3>
-            <p id="v-desc" style="color: var(--text-muted); font-size: 0.95rem;">Standard incident response vehicle equipped with Battenburg livery, LED lightbars, and emergency sirens.</p>
-          </div>
-
-          <div class="vehicle-specs">
-            <div class="spec-item">
-              <span class="spec-label">Top Speed</span>
-              <span class="spec-val" id="v-speed">155 MPH</span>
             </div>
-            <div class="spec-item">
-              <span class="spec-label">Division</span>
-              <span class="spec-val" id="v-div">Response</span>
+        </section>
+
+        <!-- Factions / Applications Section -->
+        <section>
+            <h2>Factions & Applications</h2>
+            <div class="factions-section">
+                
+                <div class="faction-card">
+                    <div>
+                        <h3>Police Scotland</h3>
+                        <p>Maintain law and order across Edinburgh, respond to 999 calls, and uphold public safety.</p>
+                    </div>
+                    <a href="https://discord.gg/YOUR_INVITE_HERE" target="_blank" class="apply-btn">Apply via Discord</a>
+                </div>
+
+                <div class="faction-card">
+                    <div>
+                        <h3>Scottish Ambulance Service</h3>
+                        <p>Provide critical pre-hospital emergency care and rapid medical response throughout the city.</p>
+                    </div>
+                    <a href="https://discord.gg/YOUR_INVITE_HERE" target="_blank" class="apply-btn">Apply via Discord</a>
+                </div>
+
+                <div class="faction-card">
+                    <div>
+                        <h3>Scottish Fire and Rescue Service</h3>
+                        <p>Tackle structural fires, handle vehicle collisions, and manage hazardous rescue operations.</p>
+                    </div>
+                    <a href="https://discord.gg/YOUR_INVITE_HERE" target="_blank" class="apply-btn">Apply via Discord</a>
+                </div>
+
             </div>
-            <div class="spec-item">
-              <span class="spec-label">Drive</span>
-              <span class="spec-val" id="v-drive">AWD</span>
-            </div>
-          </div>
+        </section>
 
-          <button class="siren-btn" onclick="playSiren()">
-            <i class="fa-solid fa-volume-high"></i> Test Emergency Siren
-          </button>
-        </div>
-      </div>
     </div>
-  </section>
 
-  <!-- Whitelist Quiz Simulator -->
-  <section id="quiz">
-    <div class="container">
-      <div class="section-title">
-        <h2>RP Whitelist Quiz</h2>
-        <p>Test your Scottish RP knowledge before joining emergency factions</p>
-      </div>
+    <footer>
+        <p>&copy; 2026 UK:RP Edinburgh. All rights reserved.</p>
+    </footer>
 
-      <div class="quiz-card">
-        <div id="quiz-body">
-          <div class="quiz-question" id="q-text">1. What does FailRP (FRP) mean during a high-speed vehicle pursuit?</div>
-          <div class="quiz-options" id="q-options">
-            <!-- Populated via JS -->
-          </div>
-          <button class="btn-primary" style="width: 100%; justify-content: center;" onclick="nextQuestion()">Submit Answer</button>
-        </div>
+    <!-- Hidden Audio Elements (Replace src with your uploaded MP3 file names if desired) -->
+    <audio id="police-siren" src="https://actions.google.com/sounds/v1/emergency/police_siren.ogg" preload="auto"></audio>
+    <audio id="ambulance-siren" src="https://actions.google.com/sounds/v1/emergency/ambulance_siren.ogg" preload="auto"></audio>
 
-        <div class="quiz-result" id="quiz-result">
-          <i class="fa-solid fa-circle-check" style="font-size: 3rem; color: var(--accent-cyan); margin-bottom: 15px;"></i>
-          <h3>Quiz Complete!</h3>
-          <p style="color: var(--text-muted); margin-bottom: 20px;">You answered <span id="quiz-score">0/3</span> correctly. You are ready to apply for Whitelisted Factions in our Discord!</p>
-          <a href="https://discord.gg/ZGgNNJpBtk" target="_blank" class="btn-discord">Join Discord to Apply</a>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- Audio Control Script -->
+    <script>
+        function toggleSiren(sirenId) {
+            stopAllSirens();
+            var audio = document.getElementById(sirenId);
+            if (audio) {
+                audio.currentTime = 0;
+                audio.play();
+            }
+        }
 
-  <!-- FAQ Section -->
-  <section id="faq">
-    <div class="container">
-      <div class="section-title">
-        <h2>Frequently Asked Questions</h2>
-        <p>Got questions? We have answers.</p>
-      </div>
-
-      <div class="faq-wrapper">
-        <div class="faq-item">
-          <div class="faq-header" onclick="toggleFaq(this)">
-            <span>When is UK:RP Edinburgh releasing?</span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-          <div class="faq-content">
-            Our current targeted launch window is set between Late 2029 and Late 2032. This gives our development team ample time to build high-quality Edinburgh locations and custom Roblox scripts.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-header" onclick="toggleFaq(this)">
-            <span>How do I join Police Scotland or Emergency Services?</span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-          <div class="faq-content">
-            You can join our official Discord server and fill out the faction application templates pinned in the applications channel.
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-header" onclick="toggleFaq(this)">
-            <span>Will the game be playable on mobile/Chromebook/console?</span>
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-          <div class="faq-content">
-            Yes! We are optimizing UI and vehicle controls so players across PC, Mobile, and Console devices can join seamlessly.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-logo">UK:RP EDINBURGH</div>
-      <ul class="footer-links">
-        <li><a href="https://discord.gg/ZGgNNJpBtk" target="_blank">Discord</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#jobs">Factions</a></li>
-        <li><a href="#quiz">Whitelist</a></li>
-      </ul>
-      <p class="copyright">&copy; 2026 UK:RP Edinburgh Roleplay Community. Created by Rory. All rights reserved.</p>
-    </div>
-  </footer>
-
-  <!-- Clean JavaScript Wrapping -->
-  <script>
-    // Countdown Timer (Target: Dec 31, 2029)
-    const targetDate = new Date('December 31, 2029 23:59:59').getTime();
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const diff = targetDate - now;
-
-      if (diff > 0) {
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-        document.getElementById('days').innerText = String(days).padStart(3, '0');
-        document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-        document.getElementById('mins').innerText = String(mins).padStart(2, '0');
-        document.getElementById('secs').innerText = String(secs).padStart(2, '0');
-      }
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    // Garage Data & Inspector
-    const vehicles = [
-      {
-        name: "Volvo V90 Estate",
-        faction: "Police Scotland",
-        desc: "Standard incident response vehicle equipped with Battenburg livery, high-visibility LED lightbars, and emergency response sirens.",
-        speed: "155 MPH",
-        div: "Response",
-        drive: "AWD"
-      },
-      {
-        name: "BMW X5 Tactical ARV",
-        faction: "Police Scotland (ARV)",
-        desc: "Armed Response Vehicle fitted with tactical gear storage, armored plating, and high-speed interception capabilities.",
-        speed: "170 MPH",
-        div: "Armed Response",
-        drive: "xDrive AWD"
-      },
-      {
-        name: "Mercedes Sprinter Ambulance",
-        faction: "SAS Paramedics",
-        desc: "Scottish Ambulance Service emergency medical unit featuring a detailed interior stretcher bay and life support systems.",
-        speed: "115 MPH",
-        div: "Emergency Medical",
-        drive: "RWD"
-      },
-      {
-        name: "Scania Rescue Pump",
-        faction: "Scottish Fire & Rescue",
-        desc: "Heavy structural fire engine equipped with working hose attachments, extrication tools, and ladder equipment.",
-        speed: "95 MPH",
-        div: "Fire & Rescue",
-        drive: "4x2 Heavy"
-      }
-    ];
-
-    function selectVehicle(idx) {
-      const buttons = document.querySelectorAll('.garage-btn');
-      buttons.forEach((btn, i) => {
-        btn.classList.toggle('active', i === idx);
-      });
-
-      const v = vehicles[idx];
-      document.getElementById('v-name').innerText = v.name;
-      document.getElementById('v-faction').innerText = v.faction;
-      document.getElementById('v-desc').innerText = v.desc;
-      document.getElementById('v-speed').innerText = v.speed;
-      document.getElementById('v-div').innerText = v.div;
-      document.getElementById('v-drive').innerText = v.drive;
-    }
-
-    // Audio Synthesizer for Siren Test
-    function playSiren() {
-      try {
-        const ctx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(440, ctx.currentTime);
-        osc.frequency.linearRampToValueAtTime(880, ctx.currentTime + 0.5);
-        osc.frequency.linearRampToValueAtTime(440, ctx.currentTime + 1.0);
-
-        gain.gain.setValueAtTime(0.1, ctx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.0);
-
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-
-        osc.start();
-        osc.stop(ctx.currentTime + 1.0);
-      } catch (e) {
-        alert("Siren sound preview triggered!");
-      }
-    }
-
-    // Whitelist Quiz Logic
-    const quizData = [
-      {
-        q: "1. What does FailRP (FRP) mean during a high-speed pursuit?",
-        options: [
-          "Driving realistically and pulling over when safe",
-          "Driving off a cliff or refusing to roleplay collision injuries",
-          "Following all Scottish road traffic laws"
-        ],
-        correct: 1
-      },
-      {
-        q: "2. What is Metagaming in UK:RP Edinburgh?",
-        options: [
-          "Using outside information (like Discord stream info) in-game",
-          "Using the in-game radio system during patrols",
-          "Reporting a server bug to the staff team"
-        ],
-        correct: 0
-      },
-      {
-        q: "3. What should you do during a emergency response call?",
-        options: [
-          "Ignore driving mechanics and crash into suspects",
-          "Value life (NVL) and follow realistic roleplay protocol",
-          "Leave the server immediately"
-        ],
-        correct: 1
-      }
-    ];
-
-    let currentQ = 0;
-    let score = 0;
-    let selectedOpt = null;
-
-    function renderQuestion() {
-      const q = quizData[currentQ];
-      document.getElementById('q-text').innerText = q.q;
-      const optsContainer = document.getElementById('q-options');
-      optsContainer.innerHTML = '';
-
-      q.options.forEach((opt, idx) => {
-        const div = document.createElement('div');
-        div.className = 'quiz-option';
-        div.innerText = opt;
-        div.onclick = () => selectOption(div, idx);
-        optsContainer.appendChild(div);
-      });
-      selectedOpt = null;
-    }
-
-    function selectOption(el, idx) {
-      document.querySelectorAll('.quiz-option').forEach(opt => opt.classList.remove('selected'));
-      el.classList.add('selected');
-      selectedOpt = idx;
-    }
-
-    function nextQuestion() {
-      if (selectedOpt === null) {
-        alert("Please select an answer first!");
-        return;
-      }
-
-      if (selectedOpt === quizData[currentQ].correct) {
-        score++;
-      }
-
-      currentQ++;
-      if (currentQ < quizData.length) {
-        renderQuestion();
-      } else {
-        document.getElementById('quiz-body').style.display = 'none';
-        document.getElementById('quiz-result').style.display = 'block';
-        document.getElementById('quiz-score').innerText = `${score}/${quizData.length}`;
-      }
-    }
-
-    renderQuestion();
-
-    // FAQ Accordion Toggle
-    function toggleFaq(el) {
-      const item = el.parentElement;
-      item.classList.toggle('active');
-    }
-  </script>
+        function stopAllSirens() {
+            var sirens = document.querySelectorAll('audio');
+            sirens.forEach(function(siren) {
+                siren.pause();
+                siren.currentTime = 0;
+            });
+        }
+    </script>
 </body>
 </html>
